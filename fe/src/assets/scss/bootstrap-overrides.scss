@@ -1,0 +1,6 @@
+@import './config';
+
+$body-bg: $primary-color;
+$theme-colors: ("primary": $secondary-color, "secondary": $primary-color);
+
+@import "~bootstrap/scss/bootstrap";

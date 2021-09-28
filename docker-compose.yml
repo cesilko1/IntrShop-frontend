@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+    frontend:
+        build: .
+        image: intrshop.raska-vilem.cz:FE
+        container_name: intrshop.raska-vilem.cz_FE
+        mem_limit: 20m
+        restart: unless-stopped
+        environment:
+            # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
+            - VIRTUAL_HOST=intrshop.raska-vilem.cz 
+            - VIRTUAL_PORT=80
+            - LETSENCRYPT_HOST=intrshop.raska-vilem.cz
+            - LETSENCRYPT_EMAIL=wilhelm.master@gmail.com
+            # END NGINX-PROXY ENVIRONMENT VARIABLES
+        expose:
+            - 80
+
+networks:
+    default:
+        external:
+            name: nginx-proxy
