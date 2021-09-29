@@ -3,8 +3,8 @@ version: '3.6'
 services:
     frontend:
         build: .
-        image: intrshop.raska-vilem.cz:FE
-        container_name: intrshop.raska-vilem.cz_FE
+        image: intrshop.cf:FE
+        container_name: intrshop.cf_FE
         mem_limit: 20m
         restart: unless-stopped
         environment:
