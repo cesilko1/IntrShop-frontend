@@ -26,6 +26,16 @@ class UserApi {
 		}
 	}
 
+	async getUserData(authToken: string): Promise<AxiosResponse<any>> {
+		this.token = axios.CancelToken.source();
+		try {
+			return await api.get('/user', {cancelToken: this.token.token, headers: {'token': authToken}});
+		}
+		catch(error) {
+			return (error as AxiosError)?.response as AxiosResponse<any>;
+		}
+	}
+
 
 	cancel(): void {
 		if(typeof this.token !== 'undefined') this.token.cancel();

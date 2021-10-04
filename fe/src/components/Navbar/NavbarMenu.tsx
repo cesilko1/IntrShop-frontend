@@ -18,7 +18,7 @@ const NavbarMenu: React.FC = () => {
 
 	const logout = (e: any) => {
 		e.preventDefault();
-		localStorage.clear();
+		localStorage.removeItem('token');
 		setToken();
 	}
 
@@ -55,9 +55,6 @@ const NavbarMenu: React.FC = () => {
 						</Nav.Link>
 						<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
 							Prodeje
-						</Nav.Link>
-						<Nav.Link onClick={(e: any)=>{setExpanded(false); logout(e)}} className={scss.navLink}>
-							Odhlásit
 						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
