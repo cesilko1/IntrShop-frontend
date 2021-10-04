@@ -12,7 +12,7 @@ import ReactDOM from 'react-dom';
 
 const App: React.FC = () => {
 	const [ token, setToken ] = useContext(TokenContext);
-	const [ user, setUser ] = useContext(UserContext);
+	const setUser = useContext(UserContext)[1];
 
 	useEffect(()=>{
 		const loadData = async () => {
