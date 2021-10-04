@@ -1,7 +1,7 @@
 import { HOME } from "paths";
 import IRoute from "interfaces/Route";
 
-import HomePage from "screens/HomePage";
+import HomePage from "screens/HomePage/HomePage";
 
 const Routes: IRoute[] = [
 	{

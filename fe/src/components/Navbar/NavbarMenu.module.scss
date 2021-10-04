@@ -1,0 +1,59 @@
+@import 'assets/scss/config';
+
+.navbar {
+	position: relative!important;
+	// top: 0;
+	// left: 0;
+	width: 100%;
+	// background: $secondary-color!important;
+	z-index: 10;
+	padding: 0 .6rem!important;
+	box-shadow: 0 0 5px $primary-color;
+}
+
+.button {
+	border: none!important;
+	outline: none!important;
+	margin-left: auto;
+}
+
+.email {
+	display: inline-block;
+	font-size: .75rem;
+	margin-left: .5rem;
+	padding-bottom: 5px;
+}
+
+.icon {
+	vertical-align: middle;
+}
+
+.navLink {
+	$transition-duration: 150ms;
+
+	padding: .6rem!important;
+	color: $light-text!important;
+	font-size: 1.3rem;
+	transition-duration: $transition-duration;
+	vertical-align: middle!important;
+	position: relative;
+
+	&::after {
+		content: '';
+		width: 0%;
+		height: 2px;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		background-color: transparent;
+		transition-duration: $transition-duration;
+	}
+
+	&:hover {
+		&::after {
+			left: 0%;
+			width: 100%;
+			background-color: $light-text;
+		}
+	}
+}
