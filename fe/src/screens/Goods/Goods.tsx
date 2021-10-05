@@ -7,6 +7,7 @@ const Goods: React.FC = () => {
 	return(
 		<Container>
 			<h1>Aktuální zboží</h1>
+			<NewGoods/>
 		</Container>
 	);
 }

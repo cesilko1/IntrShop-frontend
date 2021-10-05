@@ -1,0 +1,19 @@
+@import 'assets/scss/config';
+
+$alert-width: 30rem;
+
+.alert {
+	position: absolute;
+	width: $alert-width;
+	top: 2rem;
+	left: calc(50% - #{$alert-width/2});
+	z-index: 100;
+	box-shadow: 0 0 10px rgb(44, 44, 44);
+}
+
+@include media-breakpoint-down(sm) {
+	.alert {
+		width: 90%;
+		left: 5%;
+	}
+}

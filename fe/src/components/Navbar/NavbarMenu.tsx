@@ -23,15 +23,18 @@ const NavbarMenu: React.FC = () => {
 	}
 
 	return(
-		<Navbar expand="md" bg="primary" variant="dark" expanded={expanded} className={scss.navbar}>
+		<Navbar expand="md" variant="dark" expanded={expanded} className={scss.navbar}>
 			<Container>
 				<Navbar.Brand as={Dropdown}>
-					<Dropdown.Toggle id={uuid()}>
+					<Dropdown.Toggle id={uuid()} as="span" className={scss.toggler}>
 						<FontAwesomeIcon icon={faUserCircle} className={scss.icon}/>
 						<span className={scss.email}>{user.email}</span>
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu>
+						<Dropdown.Item>
+							Přidat Uživatele
+						</Dropdown.Item>
 						<Dropdown.Item>
 							Změnit Heslo
 						</Dropdown.Item>

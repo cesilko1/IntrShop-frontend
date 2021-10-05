@@ -1,0 +1,22 @@
+@import 'assets/scss/config';
+
+$button-size: 40px;
+
+.button {
+	border-radius: 50%!important;
+	width: $button-size;
+	height: $button-size;
+}
+
+@include media-breakpoint-down(sm) {
+	$button-size-sm: 54px;
+
+	.button {
+		position: absolute;
+		z-index: 10;
+		bottom: 1.2rem;
+		left: calc(50% - #{$button-size-sm / 2});
+		width: $button-size-sm;
+		height: $button-size-sm;
+	}
+}

@@ -4,9 +4,14 @@
 	position: relative!important;
 	width: 100%;
 	z-index: 10;
+	background-color: $secondary-color;
 	padding: 0 .6rem!important;
 	box-shadow: 0 2px 10px $secondary-color;
 	margin-bottom: .5rem;
+}
+
+.toggler {
+	cursor: pointer;
 }
 
 .button {

@@ -3,6 +3,7 @@ import { Form, Col, Alert, Button } from "react-bootstrap";
 import UserApi from 'api/UserApi';
 import { TokenContext } from 'contexts/TokenContext';
 import { UserContext } from 'contexts/UserContext';
+import GlobalAlertContext from 'contexts/GlobalAlertContext';
 import scss from './Login.module.scss';
 
 
@@ -15,10 +16,9 @@ const Login: React.FC = () => {
 	const clearForm: ILogin = {email: "", password: ""};
 	const setToken = useContext(TokenContext)[1];
 	const [user, setUser]  = useContext(UserContext);
+	const setGlobalAlert = useContext(GlobalAlertContext)[1];
 
 	const [formData, setFormData]         = useState<ILogin>(clearForm);
-	const [alertContent, setAlertContent] = useState<string>("");
-	const [alert, setAlert]               = useState<boolean>(false);
 	const [validated, setValidated]       = useState<boolean>(false);
 
 	const HandleLogin = async (event: FormEvent<HTMLFormElement>) => {
@@ -30,8 +30,11 @@ const Login: React.FC = () => {
 		const response = await UserApi.login(formData);
 
 		if(response.status !== 200) {
-			setAlertContent(response.data);
-			setAlert(true);
+			setGlobalAlert({
+				open: true,
+				variant: "danger",
+				content: response.data
+			});
 			setValidated(false);
 			return false;
 		}
@@ -68,10 +71,6 @@ const Login: React.FC = () => {
 					/>
 				</Form.Group>
 			</Form.Row>
-
-			<Alert variant="danger" dismissible show={alert} onClose={()=>setAlert(false)}>
-				<p>{alertContent}</p>
-			</Alert>
 
 			<Form.Row>
 				<Form.Group as={Col}>

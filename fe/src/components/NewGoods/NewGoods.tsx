@@ -1,15 +1,22 @@
 import React, {useState, useContext } from "react";
 import { TokenContext } from 'contexts/TokenContext';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import scss from './NewGoods.module.scss';
+import NewGoodsForm from 'components/NewGoodsForm/NewGoodsForm';
 
-interface IProps {
-	open: boolean;
-	setOpen: any;
-}
 
-const NewGoods: React.FC<IProps> = (props: IProps) => {
+const NewGoods: React.FC = () => {
+	const [open, setOpen] = useState<boolean>(false);
+
 	return(
-		<Modal size="lg" centered show={props.open} backdrop="static" onHide={()=>props.setOpen(false)}>
+		<>
+		<Button type="button" className={scss.button} onClick={()=>setOpen(true)}>
+			<FontAwesomeIcon icon={faPlus}/>
+		</Button>
+
+		<Modal size="lg" centered show={open} backdrop="static" onHide={()=>setOpen(false)}>
 			<Modal.Header closeButton>
 				<Modal.Title>
 					Vytvořit nové zboží
@@ -17,9 +24,10 @@ const NewGoods: React.FC<IProps> = (props: IProps) => {
 			</Modal.Header>
 
 			<Modal.Body>
-				
+				<NewGoodsForm close={setOpen}/>
 			</Modal.Body>
 		</Modal>
+		</>
 	);
 }
 

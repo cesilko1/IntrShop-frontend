@@ -1,4 +1,5 @@
 export default interface IGoods {
+	_id?: string;
 	name: string;
 	sellPrice: number;
 	buyPrice: number;
