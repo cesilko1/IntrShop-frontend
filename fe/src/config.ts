@@ -3,7 +3,8 @@ import IConfig from 'interfaces/Config';
 // Production environment
 const Config: IConfig = {
 	apiBaseUrl: 'https://intrshop.api.raska-vilem.cz',
-	dev: false
+	dev: false,
+	currency: "Kč"
 }
 
 // Development environment

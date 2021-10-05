@@ -12,7 +12,7 @@ const NewGoods: React.FC = () => {
 
 	return(
 		<>
-		<Button type="button" className={scss.button} onClick={()=>setOpen(true)}>
+		<Button type="button" className={"circle-button"+' '+scss.button} onClick={()=>setOpen(true)}>
 			<FontAwesomeIcon icon={faPlus}/>
 		</Button>
 

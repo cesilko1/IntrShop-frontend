@@ -6,6 +6,16 @@ import IGoods, { IGoodsUpdate } from 'interfaces/Goods';
 class GoodsApi {
 	private token?: CancelTokenSource;
 
+	async getGoods(authToken: string): Promise<AxiosResponse<IGoods[] | any>> {
+		this.token = axios.CancelToken.source();
+		try {
+			return await api.get('/goods', {cancelToken: this.token.token, headers: {'token': authToken}});
+		}
+		catch(error) {
+			return (error as AxiosError)?.response as AxiosResponse<IGoods[] | any>;
+		}
+	}
+
 	async addNewGoods(newGoods: IGoods, authToken: string): Promise<AxiosResponse<any>> {
 		this.token = axios.CancelToken.source();
 		try {

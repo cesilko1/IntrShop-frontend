@@ -8,7 +8,7 @@ $alert-width: 30rem;
 	top: 2rem;
 	left: calc(50% - #{$alert-width/2});
 	z-index: 100;
-	box-shadow: 0 0 10px rgb(44, 44, 44);
+	box-shadow: 0 0 10px $shadow-color;
 }
 
 @include media-breakpoint-down(sm) {

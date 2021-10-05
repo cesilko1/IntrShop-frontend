@@ -1,2 +1,16 @@
 @import './config.scss';
 
+
+.circle-button {
+	$button-size: 40px;
+
+	border-radius: 50%!important;
+	width: $button-size;
+	height: $button-size;
+}
+
+.section-card {
+	border-radius: 20px!important;
+	margin: .75rem 0;
+	box-shadow: 0 0 5px $shadow-color;
+}
