@@ -1,5 +1,5 @@
 import ICartData from 'interfaces/CartData';
-import ISales from 'interfaces/Sales';
+import ISales, { ISaleItem } from 'interfaces/Sales';
 
 class CartStorage {
 	private cartItemName: string = 'cart';
@@ -20,15 +20,22 @@ class CartStorage {
 		var price: number = 0;
 
 		for(var i=0; i<data.length; i+=1) {
-			if(data[i].price) {
-				price += ( data[i].price as number * data[i].count );
-				continue;
-			}
-
-			price += data[i].item.sellPrice * data[i].count;
+			price += (data[i].price || data[i].item.sellPrice) * data[i].count;
 		}
 
 		return price;
+	}
+
+	getDataForSale(): ISaleItem[] {
+		const data = this.getCurrentData();
+		const saleData: ISaleItem[] = [];
+
+		for(var i = 0; i < data.length; i += 1) {
+			const newItem = data[i].price ? {item: data[i].item._id as string, count: data[i].count, price: data[i].price} : {item: data[i].item._id as string, count: data[i].count}
+			saleData.push(newItem);
+		}
+
+		return saleData;
 	}
 
 	addToCart(item: ICartData) {

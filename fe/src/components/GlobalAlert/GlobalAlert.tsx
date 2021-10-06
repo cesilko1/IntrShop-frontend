@@ -11,7 +11,14 @@ const GlobalAlert: React.FC = () => {
 	}
 
 	return(
-		<Alert className={scss.alert} show={globalAlert.open} variant={globalAlert.variant} dismissible onClose={handleClose}>
+		<Alert
+			className={scss.alert}
+			show={globalAlert.open}
+			variant={globalAlert.variant}
+			dismissible
+			onClose={handleClose}
+			// dangerouslySetInnerHTML={{__html: globalAlert.content}}
+		>
 			{globalAlert.content}
 		</Alert>
 	);

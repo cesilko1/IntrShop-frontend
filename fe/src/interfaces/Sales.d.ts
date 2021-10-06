@@ -1,6 +1,6 @@
 export default interface ISales {
-	price: number;
-	date: Date;
+	price?: number;
+	date?: Date;
 	card: boolean;
 	items: ISaleItem[];
 }

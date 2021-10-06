@@ -31,7 +31,7 @@ const CartContent: React.FC<Iprops> = (props: Iprops) => {
 			</Col>
 
 			<Col xs="auto">
-				{props.item.item.sellPrice} {config.currency}/ks
+				{props.item.price || props.item.item.sellPrice} {config.currency}/ks
 			</Col>
 
 			<Col xs="auto">
