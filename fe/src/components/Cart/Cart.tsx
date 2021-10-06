@@ -85,7 +85,7 @@ const Cart: React.FC = () => {
 								id={uuid()}
 							/>
 						</Col>
-						<Col>
+						<Col xs="auto">
 							K platbě celkem:
 							&nbsp;
 							<b>{CartStorage.getCurrentPrice()} {config.currency}</b>
