@@ -9,12 +9,12 @@ const HomePage: React.FC = () => {
 		<GoodsInCartProvider>
 			<Container>
 				<Row xs={1} md={2}>
-					<Col className="mb-4">
+					<Col xs={{order: 'last'}} md={{order: 'first'}} className="mb-4">
 						<h3 className="mb-3">Zboží v nabídce</h3>
 						<GoodsOffer/>
 					</Col>
 
-					<Col className="mb-4">
+					<Col xs={{order: 'first'}} md={{order: 'last'}} className="mb-4">
 						<h3 className="mb-3">Nákupní košík</h3>
 						<Cart/>
 					</Col>
