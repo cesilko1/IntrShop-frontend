@@ -21,9 +21,7 @@ const GoodsOffer: React.FC<IProps> = (props: IProps) => {
 	}	
 
 	return(
-		<Card className="section-card"
-			border={(props.itemData.inStock === 0) ? "danger" : undefined}
-		>
+		<Card className="section-card">
 			<Card.Body as={Row}>
 				<Col>
 					<Row>
@@ -35,7 +33,9 @@ const GoodsOffer: React.FC<IProps> = (props: IProps) => {
 						</Col>
 					</Row>
 					<Row>
-						<Col as="h6">
+						<Col as="h6"
+						className={(props.itemData.inStock > 0) ? "text-success" : "text-danger"}
+						>
 							Skladem: {props.itemData.inStock} ks
 						</Col>
 					</Row>
