@@ -36,6 +36,12 @@ const CartContent: React.FC<Iprops> = (props: Iprops) => {
 
 			<Col xs="auto">
 				<ButtonToolbar>
+					<ButtonGroup size="sm" className="mr-1">
+						<Button variant="danger" onClick={()=>Delete()}>
+							<FontAwesomeIcon icon={faTrashAlt}/>
+						</Button>
+					</ButtonGroup>
+
 					<InputGroup size="sm">
 						<InputGroup.Prepend>
 							<Button onClick={()=>ChangeCount(props.item.count-1)}>
@@ -58,11 +64,6 @@ const CartContent: React.FC<Iprops> = (props: Iprops) => {
 						</InputGroup.Append>
 					</InputGroup>
 
-					<ButtonGroup size="sm" className="ml-1">
-						<Button variant="danger" onClick={()=>Delete()}>
-							<FontAwesomeIcon icon={faTrashAlt}/>
-						</Button>
-					</ButtonGroup>
 				</ButtonToolbar>
 			</Col>
 		</Row>
