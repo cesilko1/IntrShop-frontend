@@ -7,6 +7,7 @@ import { TokenContext } from 'contexts/TokenContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
+import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
 
 import { HOME, GOODS, SALES } from 'paths';
 import IUser from 'interfaces/User';
@@ -32,9 +33,11 @@ const NavbarMenu: React.FC = () => {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu>
-						<Dropdown.Item>
-							Přidat Uživatele
-						</Dropdown.Item>
+						<PrivilegesManager privileges={0}>
+							<Dropdown.Item>
+								Přidat Uživatele
+							</Dropdown.Item>
+						</PrivilegesManager>
 						<Dropdown.Item>
 							Změnit Heslo
 						</Dropdown.Item>
@@ -53,12 +56,14 @@ const NavbarMenu: React.FC = () => {
 						<Nav.Link as={Link} to={HOME} onClick={()=>setExpanded(false)} className={scss.navLink}>
 							Domů
 						</Nav.Link>
-						<Nav.Link as={Link} to={GOODS} onClick={()=>setExpanded(false)} className={scss.navLink}>
-							Zboží
-						</Nav.Link>
-						<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
-							Prodeje
-						</Nav.Link>
+						<PrivilegesManager privileges={0}>
+							<Nav.Link as={Link} to={GOODS} onClick={()=>setExpanded(false)} className={scss.navLink}>
+								Zboží
+							</Nav.Link>
+							<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
+								Prodeje
+							</Nav.Link>
+						</PrivilegesManager>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

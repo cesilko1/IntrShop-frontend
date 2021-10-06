@@ -8,7 +8,7 @@ import GoodsApi from "api/GoodsApi";
 const GoodsOffer: React.FC = () => {
 	const [goodsInCart,] = useContext(GoodsInCartContext);
 	const [itemsData, setItemsData] = useState<IGoods[]>([]);
-	const token = useContext(TokenContext)[1];
+	const [token,] = useContext(TokenContext);
 
 	useEffect(()=>{
 		LoadData();
