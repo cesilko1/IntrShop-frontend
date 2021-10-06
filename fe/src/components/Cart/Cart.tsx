@@ -37,6 +37,7 @@ const Cart: React.FC = () => {
 		if(response.status === 201) {
 			setGlobalAlert({open: true, variant: "success", content: response.data});
 			clearCart();
+			setPayByCard(false);
 			setGoodsInCart(!goodsInCart);
 		}
 		else if(response.status === 410 ) {
