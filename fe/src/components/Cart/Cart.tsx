@@ -41,12 +41,12 @@ const Cart: React.FC = () => {
 							);
 						})
 						:
-						"Košík je prázdný"
+						<EmptyCart/>				
 					}
 				</Card.Body>
 
 				<Card.Body>
-					K platbě celkem: {CartStorage.getCurrentPrice()} {config.currency}
+					K platbě celkem: <b>{CartStorage.getCurrentPrice()} {config.currency}</b>
 				</Card.Body>
 
 				<Card.Footer>
@@ -60,6 +60,14 @@ const Cart: React.FC = () => {
 				</Card.Footer>
 			</Card>
 		</CreateSaleProvider>
+	);
+}
+
+const EmptyCart: React.FC = () => {
+	return(
+		<b>
+			Košík je prázdný
+		</b>
 	);
 }
 

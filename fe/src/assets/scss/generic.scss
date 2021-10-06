@@ -1,8 +1,13 @@
 @import './config.scss';
 
+
 ::-webkit-scrollbar {
 	width: 0;
 	height: 0;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif!important;
 }
 
 .circle-button {
@@ -14,7 +19,7 @@
 }
 
 .section-card {
-	border-radius: 20px!important;
+	border-radius: 25px!important;
 	margin: .75rem 0;
 	box-shadow: 0 0 5px $shadow-color;
 }

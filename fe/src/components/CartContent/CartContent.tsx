@@ -13,38 +13,32 @@ interface Iprops {
 }
 
 const CartContent: React.FC<Iprops> = (props: Iprops) => {
-	const [cartItem, setCartItem] = useState<ICartData>(props.item);
-
-	useEffect(()=>{
-		setCartItem(props.item);
-	}, [props.item]);
-
 	const ChangeCount = (count: number) => {
 		if(count <= 0) return false;
-		CartStorage.setCountById(cartItem.item._id as string, count);
+		CartStorage.setCountById(props.item.item._id as string, count);
 		props.reloadData();
 	}
 
 	const Delete = () => {
-		CartStorage.deleteById(cartItem.item._id as string);
+		CartStorage.deleteById(props.item.item._id as string);
 		props.reloadData();
 	}
 
 	return(
-		<Row className="mb-2">
+		<Row className={scss.row}>
 			<Col>
-				{cartItem.item.name}
+				<b>{props.item.item.name}</b>
 			</Col>
 
 			<Col xs="auto">
-				{cartItem.item.sellPrice * cartItem.count} {config.currency}
+				{props.item.item.sellPrice} {config.currency}/ks
 			</Col>
 
 			<Col xs="auto">
 				<ButtonToolbar>
 					<InputGroup size="sm">
 						<InputGroup.Prepend>
-							<Button onClick={()=>ChangeCount(cartItem.count-1)}>
+							<Button onClick={()=>ChangeCount(props.item.count-1)}>
 								<FontAwesomeIcon icon={faMinus}/>
 							</Button>
 						</InputGroup.Prepend>
@@ -53,12 +47,12 @@ const CartContent: React.FC<Iprops> = (props: Iprops) => {
 							min={1}
 							type="number"
 							className={scss.countInput}
-							value={cartItem.count}
+							value={props.item.count}
 							onChange={(e)=>ChangeCount(Number(e.target.value))}
 						/>
 
 						<InputGroup.Append>
-							<Button onClick={()=>ChangeCount(cartItem.count+1)}>
+							<Button onClick={()=>ChangeCount(props.item.count+1)}>
 								<FontAwesomeIcon icon={faPlus}/>
 							</Button>
 						</InputGroup.Append>

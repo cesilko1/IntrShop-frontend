@@ -3,3 +3,11 @@
 .countInput {
 	width: 2.75rem!important;
 }
+
+.row {
+	$spacing: .3rem;
+
+	border-bottom: 1px solid $shadow-color;
+	margin-bottom: $spacing;
+	padding-bottom: $spacing;
+}
