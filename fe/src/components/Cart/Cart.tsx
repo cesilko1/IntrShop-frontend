@@ -10,15 +10,15 @@ import ICartData from "interfaces/CartData";
 import config from "config";
 
 const Cart: React.FC = () => {
-
+	const [goodsInCart,] = useContext(GoodsInCart);
 	const [cartData, setCartData] = useState<ICartData[]>([]);
 	
 	useEffect(()=>{
 		LoadData();
-	}, []);
+	}, [goodsInCart]);
 
 	const saveSale = () => {
-		LoadData();
+		console.log(CartStorage.getCurrentData());
 	}
 
 	const LoadData = () => {

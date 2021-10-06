@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import IGoods from 'interfaces/Goods';
-import ICartData from "interfaces/CartData";
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
@@ -13,9 +12,11 @@ interface IProps {
 }
 
 const GoodsOffer: React.FC<IProps> = (props: IProps) => {
+	const [goodsInCart, setGoodsInCart] = useContext(GoodsInCart);
 
 	const AddToCart = () => {
 		CartStorage.addToCart({item: props.itemData, count: 1});
+		setGoodsInCart(!goodsInCart);
 	}	
 
 	return(

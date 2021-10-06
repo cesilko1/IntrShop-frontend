@@ -1,6 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
-import GoodsInCart from 'contexts/GoodsInCart';
-import IGoods from "interfaces/Goods";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button, FormControl, InputGroup, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
@@ -23,9 +21,8 @@ const CartContent: React.FC<Iprops> = (props: Iprops) => {
 
 	const ChangeCount = (count: number) => {
 		if(count <= 0) return false;
-
-		setCartItem({...cartItem, count: count});
 		CartStorage.setCountById(cartItem.item._id as string, count);
+		props.reloadData();
 	}
 
 	const Delete = () => {
