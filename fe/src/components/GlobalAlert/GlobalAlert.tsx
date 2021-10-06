@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { GlobalAlertContext } from 'contexts/GlobalAlertContext';
 import { Alert } from 'react-bootstrap';
-import IGlobalAlert from 'interfaces/GlobalAlert';
 import scss from './GlobalAlert.module.scss';
 
 const GlobalAlert: React.FC = () => {

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import GoodsInCart from 'contexts/GoodsInCart';
 import IGoods from "interfaces/Goods";
 import { Row, Col, Button, FormControl, InputGroup, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
@@ -6,24 +6,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import scss from './CartContent.module.scss';
 import ICartData from "interfaces/CartData";
+import CartStorage from 'utils/CartStorage';
+import config from 'config';
 
 interface Iprops {
-	index: number;
+	item: ICartData;
+	reloadData: any;
 }
 
 const CartContent: React.FC<Iprops> = (props: Iprops) => {
-	const [goodsInCart, setGoodsInCart] = useContext(GoodsInCart);
-	const [cartItem, setCartItem] = useState<ICartData>(goodsInCart[props.index]);
+	const [cartItem, setCartItem] = useState<ICartData>(props.item);
+
+	useEffect(()=>{
+		setCartItem(props.item);
+	}, [props.item]);
 
 	const ChangeCount = (count: number) => {
 		if(count <= 0) return false;
 
-
+		setCartItem({...cartItem, count: count});
+		CartStorage.setCountById(cartItem.item._id as string, count);
 	}
 
 	const Delete = () => {
-		console.log(props.index);
-		setGoodsInCart(goodsInCart.splice(props.index, 1));
+		CartStorage.deleteById(cartItem.item._id as string);
+		props.reloadData();
 	}
 
 	return(
@@ -31,6 +38,11 @@ const CartContent: React.FC<Iprops> = (props: Iprops) => {
 			<Col>
 				{cartItem.item.name}
 			</Col>
+
+			<Col xs="auto">
+				{cartItem.item.sellPrice * cartItem.count} {config.currency}
+			</Col>
+
 			<Col xs="auto">
 				<ButtonToolbar>
 					<InputGroup size="sm">

@@ -1,33 +1,61 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GoodsInCart from 'contexts/GoodsInCart';
 import { CreateSaleProvider } from 'contexts/CreateSaleContext';
 import { Card, Button } from 'react-bootstrap';
 import CartContent from 'components/CartContent/CartContent';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import CartStorage from "utils/CartStorage";
+import ICartData from "interfaces/CartData";
+import config from "config";
 
 const Cart: React.FC = () => {
-	const goodsInCart = useContext(GoodsInCart)[0];
+
+	const [cartData, setCartData] = useState<ICartData[]>([]);
+	
+	useEffect(()=>{
+		LoadData();
+	}, []);
 
 	const saveSale = () => {
-		
+		LoadData();
+	}
+
+	const LoadData = () => {
+		setCartData(CartStorage.getCurrentData());
+	}
+
+	const clearCart = () => {
+		CartStorage.clear();
+		LoadData();
 	}
 
 	return(
 		<CreateSaleProvider>
 			<Card className="section-card">
 				<Card.Body>
-					{
-						goodsInCart.map((item: any, index: number)=>{
+					{(cartData.length !== 0) ?
+						cartData.map((item: any, key: number)=>{
 							return(
-								<CartContent key={index} index={index}/>
+								<CartContent key={key} item={item} reloadData={LoadData}/>
 							);
 						})
+						:
+						"Košík je prázdný"
 					}
 				</Card.Body>
+
+				<Card.Body>
+					K platbě celkem: {CartStorage.getCurrentPrice()} {config.currency}
+				</Card.Body>
+
 				<Card.Footer>
 					<Button className="circle-button" variant="success" onClick={()=>saveSale()}>
 						<FontAwesomeIcon icon={faCheck}/>
+					</Button>
+
+					<Button className="circle-button ml-4" variant="danger" onClick={()=>clearCart()}>
+						<FontAwesomeIcon icon={faTrashAlt}/>
 					</Button>
 				</Card.Footer>
 			</Card>
