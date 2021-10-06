@@ -54,7 +54,7 @@ const NavbarMenu: React.FC = () => {
 				<Navbar.Collapse>
 					<Nav className="ml-auto">
 						<Nav.Link as={Link} to={HOME} onClick={()=>setExpanded(false)} className={scss.navLink}>
-							Domů
+							Prodávat
 						</Nav.Link>
 						<PrivilegesManager privileges={0}>
 							<Nav.Link as={Link} to={GOODS} onClick={()=>setExpanded(false)} className={scss.navLink}>
