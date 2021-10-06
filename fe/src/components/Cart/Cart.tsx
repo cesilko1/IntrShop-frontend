@@ -18,7 +18,7 @@ import IGlobalAlert from "interfaces/GlobalAlert";
 const Cart: React.FC = () => {
 	const [,setGlobalAlert] = useContext(GlobalAlertContext);
 	const [token,] = useContext(TokenContext);
-	const [goodsInCart,] = useContext(GoodsInCart);
+	const [goodsInCart,setGoodsInCart] = useContext(GoodsInCart);
 	const [cartData, setCartData] = useState<ICartData[]>([]);
 	const [payByCard, setPayByCard] = useState<boolean>(false);
 	
@@ -37,6 +37,7 @@ const Cart: React.FC = () => {
 		if(response.status === 201) {
 			setGlobalAlert({open: true, variant: "success", content: response.data});
 			clearCart();
+			setGoodsInCart(!goodsInCart);
 		}
 		else if(response.status === 410 ) {
 			const alert: IGlobalAlert = {

@@ -14,7 +14,7 @@ interface Iprops {
 
 const CartContent: React.FC<Iprops> = (props: Iprops) => {
 	const ChangeCount = (count: number) => {
-		if(count <= 0) return false;
+		if(count <= 0 || count > props.item.item.inStock) return false;
 		CartStorage.setCountById(props.item.item._id as string, count);
 		props.reloadData();
 	}

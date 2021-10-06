@@ -15,12 +15,15 @@ const GoodsOffer: React.FC<IProps> = (props: IProps) => {
 	const [goodsInCart, setGoodsInCart] = useContext(GoodsInCart);
 
 	const AddToCart = () => {
+		if(props.itemData.inStock === 0) return false;
 		CartStorage.addToCart({item: props.itemData, count: 1});
 		setGoodsInCart(!goodsInCart);
 	}	
 
 	return(
-		<Card className="section-card">
+		<Card className="section-card"
+			border={(props.itemData.inStock === 0) ? "danger" : undefined}
+		>
 			<Card.Body as={Row}>
 				<Col>
 					<Row>
