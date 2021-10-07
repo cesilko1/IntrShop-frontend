@@ -74,7 +74,9 @@ const GoodsList: React.FC = () => {
 
 		<Modal size="lg" centered show={openModal} backdrop="static" onHide={()=>setOpenModal(false)}>
 			<Modal.Header closeButton>
-				Upravit položku
+				<Modal.Title>
+					Upravit položku
+				</Modal.Title>
 			</Modal.Header>
 
 			<Modal.Body>

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Nav, Navbar, Container, Button, Dropdown } from "react-bootstrap";
+import { Nav, Navbar, Container, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import scss from './NavbarMenu.module.scss';
 import { UserContext } from 'contexts/UserContext';
