@@ -9,7 +9,7 @@ import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
 import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
 
-import { HOME, GOODS, SALES } from 'paths';
+import { HOME, GOODS, SALES, USERS } from 'paths';
 import IUser from 'interfaces/User';
 
 const NavbarMenu: React.FC = () => {
@@ -62,6 +62,9 @@ const NavbarMenu: React.FC = () => {
 							</Nav.Link>
 							<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
 								Prodeje
+							</Nav.Link>
+							<Nav.Link as={Link} to={USERS} onClick={()=>setExpanded(false)} className={scss.navLink}>
+								Uživatelé
 							</Nav.Link>
 						</PrivilegesManager>
 					</Nav>
