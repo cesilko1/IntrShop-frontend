@@ -20,7 +20,7 @@ const GoodsList: React.FC = () => {
 	}
 
 	return(
-		<Table striped bordered hover>
+		<Table responsive="md" striped bordered hover>
 			<thead>
 				<tr>
 					<th>Název</th>

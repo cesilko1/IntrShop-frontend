@@ -6,7 +6,7 @@ import NewGoods from 'components/NewGoods/NewGoods';
 const Goods: React.FC = () => {
 	return(
 		<Container>
-			<Card className="section-card">
+			<Card className="section-card mb-5">
 				<Card.Header>
 					<Row>
 						<Col>
