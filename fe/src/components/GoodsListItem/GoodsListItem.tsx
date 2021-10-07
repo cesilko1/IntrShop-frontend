@@ -14,7 +14,7 @@ interface IProps {
 
 const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 	const [,setGoodsUpdate] = useContext(GoodsUpdateContext);
-	const margin = useMemo(()=>{return (props.item.sellPrice * 1000 - props.item.buyPrice * 1000) / 1000}, []);
+	const margin = useMemo(()=>{return ((props.item.sellPrice * 1000 - props.item.buyPrice * 1000) / 1000).toFixed(2)}, []);
 
 	const OpenItemMenu = () => {
 		setGoodsUpdate(props.item);
