@@ -34,7 +34,7 @@ const GoodsList: React.FC = () => {
 			</thead>
 			<tbody>
 				{
-					goods.map((item, key)=>{
+					goods.map((item: IGoods, key: number) => {
 						return(
 							<GoodsListItem item={item} key={key}/>
 						);
