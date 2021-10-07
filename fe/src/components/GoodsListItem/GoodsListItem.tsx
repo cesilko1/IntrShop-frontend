@@ -1,12 +1,13 @@
+import React, { useMemo } from "react";
 import IGoods from "interfaces/Goods";
-import React from "react";
+import config from 'config';
 
 interface IProps {
 	item: IGoods;
 }
 
 const GoodsListItem: React.FC<IProps> = (props: IProps) => {
-	const margin = (props.item.sellPrice * 1000 - props.item.buyPrice * 1000) / 1000;
+	const margin = useMemo(()=>{return (props.item.sellPrice * 1000 - props.item.buyPrice * 1000) / 1000}, []);
 
 	return(
 		<tr>
@@ -14,24 +15,22 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 			{props.item.name}
 			</td>
 			<td>
-				{props.item.sellPrice}
+				{props.item.sellPrice} {config.currency}
 			</td>
 			<td>
-				{props.item.inStock}
+				{props.item.inStock} ks
 			</td>
 			<td>
-				{props.item.buyPrice}
+				{props.item.buyPrice} {config.currency}
 			</td>
 			<td>
-				{props.item.lost}
+				{props.item.lost} ks
 			</td>
 			<td>
-				{margin}
+				{margin} {config.currency}
 			</td>
 			<td>
-				{
-					100*(props.item.sellPrice/props.item.buyPrice)
-				}	
+				{Math.round((margin / props.item.sellPrice) * 100)} %	
 			</td>
 		</tr>
 	);

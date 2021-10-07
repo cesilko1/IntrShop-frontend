@@ -15,7 +15,6 @@ const GoodsList: React.FC = () => {
 
 	const LoadData = async () => {
 		const response = await GoodsApi.getGoods(token);
-		console.log(response.data);
 		setGoods(response.data);
 	}
 
@@ -24,11 +23,11 @@ const GoodsList: React.FC = () => {
 			<thead>
 				<tr>
 					<th>Název</th>
-					<th>Cena Kč</th>
-					<th>Skladem ks</th>
-					<th>Nákupní cena Kč</th>
+					<th>Cena</th>
+					<th>Skladem</th>
+					<th>Nákupní cena</th>
 					<th>Ztraceno</th>
-					<th>Marže Kč</th>
+					<th>Marže</th>
 					<th>Marže %</th>
 				</tr>
 			</thead>

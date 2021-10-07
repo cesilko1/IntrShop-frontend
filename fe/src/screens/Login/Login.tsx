@@ -4,6 +4,7 @@ import UserApi from 'api/UserApi';
 import { TokenContext } from 'contexts/TokenContext';
 import { UserContext } from 'contexts/UserContext';
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
+import AlertManager from 'utils/alertManager';
 import scss from './Login.module.scss';
 
 
@@ -15,7 +16,7 @@ interface ILogin {
 const Login: React.FC = () => {
 	const clearForm: ILogin = {email: "", password: ""};
 	const setToken = useContext(TokenContext)[1];
-	const [user, setUser]  = useContext(UserContext);
+	const [,setUser]  = useContext(UserContext);
 	const setGlobalAlert = useContext(GlobalAlertContext)[1];
 
 	const [formData, setFormData]         = useState<ILogin>(clearForm);
