@@ -22,6 +22,7 @@ const GoodsList: React.FC = () => {
 		<Table responsive="md" striped bordered hover>
 			<thead>
 				<tr>
+					<th></th>
 					<th>Název</th>
 					<th>Cena</th>
 					<th>Skladem</th>

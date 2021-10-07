@@ -75,35 +75,45 @@ const Cart: React.FC = () => {
 					}
 				</Card.Body>
 
-				<Card.Body>
+				<Card.Footer>
 					<Row>
-						<Col>
-							<Form.Check
-								type="checkbox"
-								checked={payByCard}
-								onChange={(e:any)=>setPayByCard(e.target.checked)}
-								label="Platba kartou"
-								id={uuid()}
-							/>
-						</Col>
 						<Col xs="auto">
-							K platbě celkem:
-							&nbsp;
-							<b>{CartStorage.getCurrentPrice()} {config.currency}</b>
-							&nbsp;
-							{payByCard ? <CardIcon/> : <CashIcon/>}
+							<Button className="circle-button" variant="danger" onClick={()=>clearCart()}>
+								<FontAwesomeIcon icon={faTrashAlt}/>
+							</Button>
+						</Col>
+
+						<Col className="text-center">
+							<Row className="mb-2">
+								<Col>
+									<Form.Check
+										type="checkbox"
+										checked={payByCard}
+										onChange={(e:any)=>setPayByCard(e.target.checked)}
+										label="Platba kartou"
+										id={uuid()}
+									/>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
+									<h6>
+										Celkem:
+										&nbsp;
+										<b>{CartStorage.getCurrentPrice()} {config.currency}</b>
+										&nbsp;
+										{payByCard ? <CardIcon/> : <CashIcon/>}
+									</h6>
+								</Col>
+							</Row>
+						</Col>
+
+						<Col xs="auto">
+							<Button className="circle-button" variant="success" onClick={()=>saveSale()}>
+								<FontAwesomeIcon icon={faCheck}/>
+							</Button>
 						</Col>
 					</Row>
-				</Card.Body>
-
-				<Card.Footer>
-					<Button className="circle-button" variant="success" onClick={()=>saveSale()}>
-						<FontAwesomeIcon icon={faCheck}/>
-					</Button>
-
-					<Button className="circle-button ml-4" variant="danger" onClick={()=>clearCart()}>
-						<FontAwesomeIcon icon={faTrashAlt}/>
-					</Button>
 				</Card.Footer>
 			</Card>
 		</CreateSaleProvider>

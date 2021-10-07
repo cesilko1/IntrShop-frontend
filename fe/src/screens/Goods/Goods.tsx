@@ -20,7 +20,9 @@ const Goods: React.FC = () => {
 				</Card.Header>
 
 				<Card.Body>
-					<GoodsList/>
+					<GoodsUpdateProvider>
+						<GoodsList/>
+					</GoodsUpdateProvider>
 				</Card.Body>
 			</Card>
 		</Container>

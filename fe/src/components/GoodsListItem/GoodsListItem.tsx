@@ -1,6 +1,10 @@
 import React, { useMemo } from "react";
 import IGoods from "interfaces/Goods";
 import config from 'config';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+
 
 interface IProps {
 	item: IGoods;
@@ -11,6 +15,11 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 
 	return(
 		<tr>
+			<td>
+				<Button size="sm">
+					<FontAwesomeIcon icon={faEdit}/>
+				</Button>
+			</td>
 			<td>
 			{props.item.name}
 			</td>
