@@ -1,6 +1,6 @@
 import React, {useState, useContext } from "react";
 import { TokenContext } from 'contexts/TokenContext';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import scss from './NewGoods.module.scss';

@@ -4,7 +4,7 @@
 	$button-size-sm: 54px;
 	
 	.button {
-		position: absolute;
+		position: fixed;
 		z-index: 10;
 		bottom: 1.2rem;
 		left: calc(50% - #{$button-size-sm / 2});
