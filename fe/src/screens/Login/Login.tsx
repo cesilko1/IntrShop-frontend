@@ -1,10 +1,9 @@
 import React, { useState, useContext, FormEvent } from "react";
-import { Form, Col, Alert, Button } from "react-bootstrap";
+import { Form, Col, Button } from "react-bootstrap";
 import UserApi from 'api/UserApi';
 import { TokenContext } from 'contexts/TokenContext';
 import { UserContext } from 'contexts/UserContext';
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
-import AlertManager from 'utils/alertManager';
 import scss from './Login.module.scss';
 
 
