@@ -47,7 +47,7 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 				{margin} {config.currency}
 			</td>
 			<td>
-				{Math.round((margin / props.item.sellPrice) * 100)} %	
+				{Math.round((parseFloat(margin) / props.item.sellPrice) * 100)} %	
 			</td>
 		</tr>
 	);
