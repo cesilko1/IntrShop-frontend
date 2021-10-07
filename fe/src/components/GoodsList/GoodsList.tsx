@@ -7,6 +7,7 @@ import { Table, Modal, Button } from 'react-bootstrap';
 import GoodsUpdateForm from 'components/GoodsUpdateForm/GoodsUpdateForm';
 import GoodsUpdateContext from "contexts/GoodsUpdateContext";
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
+import GoodsSorting from 'utils/goodsSorting';
 
 const GoodsList: React.FC = () => {
 	const [,setGlobalAlert] = useContext(GlobalAlertContext);
@@ -42,13 +43,16 @@ const GoodsList: React.FC = () => {
 		}
 	}
 
+	const ReverseData = () => {
+	}
+
 	return(
 		<>
 		<Table responsive="md" striped bordered hover>
 			<thead>
 				<tr>
 					<th></th>
-					<th>Název</th>
+					<th onClick={()=>ReverseData()}>Název</th>
 					<th>Cena</th>
 					<th>Skladem</th>
 					<th>Nákupní cena</th>
