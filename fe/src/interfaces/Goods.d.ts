@@ -5,6 +5,7 @@ export default interface IGoods {
 	buyPrice: number;
 	inStock: number;
 	lost: number;
+	sold: number;
 }
 
 export interface IGoodsUpdate {

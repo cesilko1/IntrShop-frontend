@@ -32,16 +32,19 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 			{props.item.name}
 			</td>
 			<td>
-				{props.item.sellPrice} {config.currency}
-			</td>
-			<td>
 				{props.item.inStock} ks
 			</td>
 			<td>
-				{props.item.buyPrice} {config.currency}
+				{props.item.sold} ks
 			</td>
 			<td>
 				{props.item.lost} ks
+			</td>
+			<td>
+				{props.item.sellPrice} {config.currency}
+			</td>
+			<td>
+				{props.item.buyPrice} {config.currency}
 			</td>
 			<td>
 				{margin} {config.currency}

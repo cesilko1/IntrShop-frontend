@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
-	const clearForm: IGoods = {name: "", sellPrice: 0, buyPrice: 0, inStock: 0, lost: 0}
+	const clearForm: IGoods = {name: "", sellPrice: 0, buyPrice: 0, inStock: 0, lost: 0, sold: 0}
 	const token = useContext(TokenContext)[0];
 	const setGlobalAlert = useContext(GlobalAlertContext)[1];
 

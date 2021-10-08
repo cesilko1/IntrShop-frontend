@@ -53,10 +53,11 @@ const GoodsList: React.FC = () => {
 				<tr>
 					<th></th>
 					<th onClick={()=>ReverseData()}>Název</th>
-					<th>Cena</th>
 					<th>Skladem</th>
-					<th>Nákupní cena</th>
+					<th>Prodáno</th>
 					<th>Ztraceno</th>
+					<th>Prodejní cena</th>
+					<th>Nákupní cena</th>
 					<th>Marže</th>
 					<th>Marže %</th>
 				</tr>
