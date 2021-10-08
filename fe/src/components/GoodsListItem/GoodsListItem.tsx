@@ -44,13 +44,13 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 				{props.item.sellPrice} {config.currency}
 			</td>
 			<td>
-				{props.item.buyPrice} {config.currency}
+				{props.item.buyPrice.toString().replace('.', ',')} {config.currency}
 			</td>
 			<td>
-				{margin} {config.currency}
+				{margin.replace('.', ',')} {config.currency}/ks
 			</td>
 			<td>
-				{Math.round((parseFloat(margin) / props.item.sellPrice) * 100)} %	
+				{(Math.round((parseFloat(margin) / props.item.sellPrice) * 1000) / 10).toString().replace('.', ',')} %	
 			</td>
 		</tr>
 	);
