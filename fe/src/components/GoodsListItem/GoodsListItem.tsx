@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import GoodsUpdateContext from 'contexts/GoodsUpdateContext';
-
+import GoodsApi from 'api/GoodsApi';
 
 interface IProps {
 	item: IGoods;
@@ -21,12 +21,16 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 		props.openMenu();
 	}
 
+	const LooseItem = () => {}
+
 	return(
 		<tr>
 			<td>
 				<Button size="sm" onClick={()=>OpenItemMenu()}>
 					<FontAwesomeIcon icon={faEdit}/>
 				</Button>
+
+
 			</td>
 			<td>
 			{props.item.name}

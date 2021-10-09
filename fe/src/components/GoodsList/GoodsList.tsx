@@ -8,6 +8,7 @@ import GoodsUpdateForm from 'components/GoodsUpdateForm/GoodsUpdateForm';
 import GoodsUpdateContext from "contexts/GoodsUpdateContext";
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
 import GoodsSorting from 'utils/goodsSorting';
+import scss from './GoodsList.module.scss';
 
 const GoodsList: React.FC = () => {
 	const [,setGlobalAlert] = useContext(GlobalAlertContext);
@@ -44,15 +45,18 @@ const GoodsList: React.FC = () => {
 	}
 
 	const ReverseData = () => {
+		console.log("sorting");
+		const sortedData = [...goods].reverse();
+		setGoods(sortedData);
 	}
 
 	return(
 		<>
 		<Table responsive="md" striped bordered hover>
 			<thead>
-				<tr>
+				<tr className={scss.tableHeader}>
 					<th></th>
-					<th onClick={()=>ReverseData()}>Název</th>
+					<th onClick={()=>ReverseData()}>Název zboží</th>
 					<th>Skladem</th>
 					<th>Prodáno</th>
 					<th>Ztraceno</th>
@@ -62,7 +66,7 @@ const GoodsList: React.FC = () => {
 					<th>Marže %</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody className={scss.tbody}>
 				{
 					goods.map((item: IGoods, key: number) => {
 						return(

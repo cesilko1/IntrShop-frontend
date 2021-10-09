@@ -56,6 +56,15 @@ class GoodsApi {
 		}
 	}
 
+	async looseGoodsById(id: string, count: number, authToken: string): Promise<AxiosResponse<IGoods>> {
+		this.token = axios.CancelToken.source();
+		try {
+			return await api.put('/goods/'+id+'/loose', {count: count}, {cancelToken: this.token.token, headers: {'token': authToken}});
+		}
+		catch(error) {
+			return (error as AxiosError)?.response as AxiosResponse<IGoods>;
+		}
+	}
 
 	cancel(): void {
 		if(typeof this.token !== 'undefined') this.token.cancel();
