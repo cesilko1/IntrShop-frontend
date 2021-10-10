@@ -56,7 +56,7 @@ const GoodsList: React.FC = () => {
 			<thead>
 				<tr className={scss.tableHeader}>
 					<th></th>
-					<th onClick={()=>ReverseData()}>Název zboží</th>
+					<th onClick={()=>ReverseData()} style={{width: "8rem"}}>Název zboží</th>
 					<th>Skladem</th>
 					<th>Prodáno</th>
 					<th>Ztraceno</th>
