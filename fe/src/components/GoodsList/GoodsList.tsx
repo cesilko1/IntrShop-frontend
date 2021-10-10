@@ -3,11 +3,10 @@ import TokenContext from "contexts/TokenContext";
 import GoodsApi from "api/GoodsApi";
 import IGoods from "interfaces/Goods";
 import GoodsListItem from 'components/GoodsListItem/GoodsListItem';
-import { Table, Modal, Button } from 'react-bootstrap';
+import { Table, Modal, Button, FormControl } from 'react-bootstrap';
 import GoodsUpdateForm from 'components/GoodsUpdateForm/GoodsUpdateForm';
 import GoodsUpdateContext from "contexts/GoodsUpdateContext";
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
-import GoodsSorting from 'utils/goodsSorting';
 import scss from './GoodsList.module.scss';
 
 const GoodsList: React.FC = () => {
@@ -16,6 +15,7 @@ const GoodsList: React.FC = () => {
 	const [token,] = useContext(TokenContext);
 	const [goods, setGoods] = useState<IGoods[]>([]);
 	const [openModal, setOpenModal] = useState<boolean>(false);
+	const [searchBy, setSearchBy] = useState<string>("");
 
 	useEffect(()=>{
 		LoadData();
@@ -50,8 +50,24 @@ const GoodsList: React.FC = () => {
 		setGoods(sortedData);
 	}
 
+	const HandleSearch = (searchString: string) => {
+		setSearchBy(searchString);
+		if(searchString === '') return LoadData();
+
+		setGoods([...goods].filter(o=>o.name.toLowerCase().includes(searchString)));
+	}
+
 	return(
 		<>
+		<FormControl
+			placeholder="Vyhledat"
+			size="sm"
+			className="w-50 mb-3"
+			type="text"
+			value={searchBy}
+			onChange={e=>HandleSearch(e.target.value)}
+		/>
+
 		<Table responsive="md" striped bordered hover>
 			<thead>
 				<tr className={scss.tableHeader}>

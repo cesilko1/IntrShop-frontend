@@ -90,7 +90,7 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 				<td>
 					{props.item.buyPrice.toString().replace('.', ',')} {config.currency}
 				</td>
-				<td className="text-nowrap">
+				<td>
 					{margin.replace('.', ',')} {config.currency}
 				</td>
 				<td>
