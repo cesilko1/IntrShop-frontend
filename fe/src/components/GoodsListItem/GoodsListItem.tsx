@@ -72,7 +72,7 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 						</ButtonGroup>
 					</ButtonToolbar>
 				</td>
-				<td>
+				<td className="text-left">
 				{props.item.name}
 				</td>
 				<td>
