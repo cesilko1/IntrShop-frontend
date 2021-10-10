@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuid } from 'uuid';
 import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
+import config from 'config';
 
 import { HOME, GOODS, SALES, USERS } from 'paths';
 import IUser from 'interfaces/User';
@@ -46,7 +47,14 @@ const NavbarMenu: React.FC = () => {
 							<FontAwesomeIcon icon={faSignOutAlt}/>
 							&nbsp;Odhlásit
 						</Dropdown.Item>
+
 					</Dropdown.Menu>
+
+					{config.dev ? 
+						<small className="text-danger ml-2">Development mode!</small>
+						:
+						""
+					}
 				</Navbar.Brand>
 
 				<Navbar.Toggle onClick={()=>setExpanded(!expanded)} className={scss.button}/>
