@@ -70,7 +70,7 @@ const GoodsList: React.FC = () => {
 				{
 					goods.map((item: IGoods, key: number) => {
 						return(
-							<GoodsListItem item={item} key={key} openMenu={OpenModal}/>
+							<GoodsListItem item={item} key={key} openMenu={OpenModal} reloadTable={LoadData}/>
 						);
 					})
 				}
