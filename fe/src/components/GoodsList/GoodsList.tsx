@@ -30,20 +30,6 @@ const GoodsList: React.FC = () => {
 		setOpenModal(true);
 	}
 
-	const DeleteItem = async () => {
-		const response = await GoodsApi.deleteGoodsById(goodsUpdate._id, token);
-
-		if(response.status === 200) {
-			setGlobalAlert({
-				open: true,
-				variant: "warning",
-				content: "Položka "+goodsUpdate.name+" je smazána"
-			})
-			setOpenModal(false);
-			LoadData();
-		}
-	}
-
 	const ReverseData = () => {
 		const sortedData = [...goods].reverse();
 		setGoods(sortedData);
@@ -103,12 +89,6 @@ const GoodsList: React.FC = () => {
 			<Modal.Body>
 				<GoodsUpdateForm reloadData={LoadData}/>
 			</Modal.Body>
-
-			<Modal.Footer>
-				<Button variant="danger" onClick={()=>DeleteItem()}>
-					Smazat
-				</Button>
-			</Modal.Footer>
 		</Modal>
 		</>
 	);

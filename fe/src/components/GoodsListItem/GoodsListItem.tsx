@@ -8,6 +8,8 @@ import GoodsUpdateContext from 'contexts/GoodsUpdateContext';
 import GoodsApi from 'api/GoodsApi';
 import TokenContext from "contexts/TokenContext";
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
+import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
+import GoodsAddForm from 'components/GoodsAddForm/GoodsAddForm';
 
 interface IProps {
 	item: IGoods;
@@ -23,6 +25,8 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [looseCount, setLooseCOunt] = useState<number>(1);
+
+	const [openAddModal, setOpenAddModal] = useState<boolean>(false);
 
 	const OpenItemMenu = () => {
 		setGoodsUpdate(props.item);
@@ -74,11 +78,13 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 			<tr>
 				<td>
 					<ButtonToolbar className="flex-nowrap">
-						<ButtonGroup className="mr-1">
-							<Button size="sm" variant="success" onClick={()=>setOpenModal(!openModal)}>
-								<FontAwesomeIcon icon={faPlus}/>
-							</Button>
-						</ButtonGroup>
+						<PrivilegesManager privileges={0}>
+							<ButtonGroup className="mr-1">
+								<Button size="sm" variant="success" onClick={()=>setOpenAddModal(true)}>
+									<FontAwesomeIcon icon={faPlus}/>
+								</Button>
+							</ButtonGroup>
+						</PrivilegesManager>
 
 						<ButtonGroup className="mr-1">
 							<Button size="sm" variant="warning" onClick={()=>setOpenModal(!openModal)}>
@@ -86,19 +92,22 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 							</Button>
 						</ButtonGroup>
 
-						<ButtonGroup className="mr-1">
-							<Button size="sm" variant="primary" onClick={()=>OpenItemMenu()}>
-								<FontAwesomeIcon icon={faPen}/>
-							</Button>
-						</ButtonGroup>
+						<PrivilegesManager privileges={0}>
+							<ButtonGroup className="mr-1">
+								<Button size="sm" variant="primary" onClick={()=>OpenItemMenu()}>
+									<FontAwesomeIcon icon={faPen}/>
+								</Button>
+							</ButtonGroup>
 
-						<ButtonGroup>
-							<Button size="sm" variant="danger" onDoubleClick={()=>deleteItem()}>
-								<FontAwesomeIcon icon={faTrashAlt}/>
-							</Button>
-						</ButtonGroup>
+							<ButtonGroup>
+								<Button size="sm" variant="danger" onDoubleClick={()=>deleteItem()}>
+									<FontAwesomeIcon icon={faTrashAlt}/>
+								</Button>
+							</ButtonGroup>
+						</PrivilegesManager>
 					</ButtonToolbar>
 				</td>
+				
 				<td className="text-left">
 				{props.item.name}
 				</td>
@@ -118,7 +127,7 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 					{props.item.sellPrice} {config.currency}
 				</td>
 				<td>
-					{props.item.buyPrice.toString().replace('.', ',')} {config.currency}
+					{props.item.buyPrice.toFixed(2).replace('.', ',')} {config.currency}
 				</td>
 				<td>
 					{margin.replace('.', ',')} {config.currency}
@@ -148,6 +157,18 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 						Odepsat
 					</Button>
 				</Modal.Footer>
+			</Modal>
+
+			<Modal size="sm" centered show={openAddModal} backdrop="static" onHide={()=>setOpenAddModal(false)}>
+				<Modal.Header closeButton>
+					<Modal.Title>
+						Přikoupit zboží
+					</Modal.Title>
+				</Modal.Header>
+
+				<Modal.Body>
+					<GoodsAddForm item={props.item} close={setOpenAddModal} reload={props.reloadTable}/>
+				</Modal.Body>
 			</Modal>
 		</>
 	);

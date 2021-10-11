@@ -3,7 +3,6 @@ import { TokenContext } from 'contexts/TokenContext';
 import { Modal, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import scss from './NewGoods.module.scss';
 import NewGoodsForm from 'components/NewGoodsForm/NewGoodsForm';
 
 
@@ -12,11 +11,11 @@ const NewGoods: React.FC = () => {
 
 	return(
 		<>
-		<Button type="button" className={"circle-button"+' '+scss.button} onClick={()=>setOpen(true)}>
+		<Button type="button" className={"circle-button circle-button-mobile"} onClick={()=>setOpen(true)}>
 			<FontAwesomeIcon icon={faPlus}/>
 		</Button>
 
-		<Modal size="lg" centered show={open} backdrop="static" onHide={()=>setOpen(false)}>
+		<Modal centered show={open} backdrop="static" onHide={()=>setOpen(false)}>
 			<Modal.Header closeButton>
 				<Modal.Title>
 					Vytvořit nové zboží

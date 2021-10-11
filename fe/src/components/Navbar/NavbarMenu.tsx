@@ -34,11 +34,9 @@ const NavbarMenu: React.FC = () => {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu>
-						<PrivilegesManager privileges={0}>
-							<Dropdown.Item>
-								Přidat Uživatele
-							</Dropdown.Item>
-						</PrivilegesManager>
+						<Dropdown.Item>
+							Změnit email
+						</Dropdown.Item>
 						<Dropdown.Item>
 							Změnit Heslo
 						</Dropdown.Item>
@@ -47,11 +45,10 @@ const NavbarMenu: React.FC = () => {
 							<FontAwesomeIcon icon={faSignOutAlt}/>
 							&nbsp;Odhlásit
 						</Dropdown.Item>
-
 					</Dropdown.Menu>
 
 					{config.dev ? 
-						<small className="text-danger ml-2">Development mode!</small>
+						<small className="bg-danger ml-2">Development mode!</small>
 						:
 						""
 					}
@@ -64,10 +61,10 @@ const NavbarMenu: React.FC = () => {
 						<Nav.Link as={Link} to={HOME} onClick={()=>setExpanded(false)} className={scss.navLink}>
 							Prodávat
 						</Nav.Link>
+						<Nav.Link as={Link} to={GOODS} onClick={()=>setExpanded(false)} className={scss.navLink}>
+							Zboží
+						</Nav.Link>
 						<PrivilegesManager privileges={0}>
-							<Nav.Link as={Link} to={GOODS} onClick={()=>setExpanded(false)} className={scss.navLink}>
-								Zboží
-							</Nav.Link>
 							<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
 								Prodeje
 							</Nav.Link>

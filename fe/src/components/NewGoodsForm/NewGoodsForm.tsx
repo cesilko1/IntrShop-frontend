@@ -10,12 +10,19 @@ interface IProps {
 	close: any;
 }
 
+interface IFormData {
+	name: string;
+	count: number;
+	buyPrice: number;
+	sellPrice: number;
+}
+
 const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
-	const clearForm: IGoods = {name: "", sellPrice: 0, buyPrice: 0, inStock: 0, lost: 0, sold: 0, bought: 0}
+	const clearForm: IFormData = {name: "", count: 0, buyPrice: 0, sellPrice: 0};
 	const token = useContext(TokenContext)[0];
 	const setGlobalAlert = useContext(GlobalAlertContext)[1];
 
-	const [formData, setFormData]         = useState<IGoods>(clearForm);
+	const [formData, setFormData]         = useState<IFormData>(clearForm);
 	const [validated, setValidated]       = useState<boolean>(false);
 
 	const SubmitForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -24,7 +31,17 @@ const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
 
 		if(!form.checkValidity()) {setValidated(true); return false;}
 
-		const response = await GoodsApi.addNewGoods(formData, token);
+		const newGoods: IGoods = {
+			name: formData.name,
+			inStock: formData.count,
+			buyPrice: (formData.buyPrice / formData.count),
+			bought: formData.count,
+			lost: 0,
+			sold: 0,
+			sellPrice: formData.sellPrice
+		};
+
+		const response = await GoodsApi.addNewGoods(newGoods, token);
 
 		if(response.status === 201) {
 			setGlobalAlert({
@@ -42,8 +59,10 @@ const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
 
 	return(
 		<Form noValidate validated={validated} onSubmit={SubmitForm}>
+
+
 			<Form.Row>
-				<Form.Group as={Col} id={uuid()}>
+				<Form.Group as={Col} controlId={uuid()}>
 					<Form.Label>Název</Form.Label>
 					<Form.Control
 						type="text"
@@ -55,20 +74,20 @@ const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
 			</Form.Row>
 
 			<Form.Row>
-				<Form.Group as={Col} id={uuid()}>
-					<Form.Label>Prodejní cena</Form.Label>
+				<Form.Group as={Col} controlId={uuid()}>
+					<Form.Label>Nakoupený počet</Form.Label>
 					<Form.Control
 						type="number"
-						value={formData.sellPrice}
+						value={formData.count}
 						required
-						onChange={e=>setFormData({...formData, sellPrice: Number(e.target.value)})}
+						onChange={e=>setFormData({...formData, count: Number(e.target.value)})}
 					/>
 				</Form.Group>
 			</Form.Row>
 
 			<Form.Row>
-				<Form.Group as={Col} id={uuid()}>
-					<Form.Label>Nákupní cena</Form.Label>
+				<Form.Group as={Col} controlId={uuid()}>
+					<Form.Label>Celková cena</Form.Label>
 					<Form.Control
 						type="number"
 						value={formData.buyPrice}
@@ -79,38 +98,17 @@ const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
 			</Form.Row>
 
 			<Form.Row>
-				<Form.Group as={Col} id={uuid()}>
-					<Form.Label>Počet na skladu</Form.Label>
+				<Form.Group as={Col} controlId={uuid()}>
+					<Form.Label>Prodejní cena za kus</Form.Label>
 					<Form.Control
 						type="number"
-						value={formData.inStock}
+						value={formData.sellPrice}
 						required
-						onChange={e=>setFormData({...formData, inStock: Number(e.target.value)})}
+						onChange={e=>setFormData({...formData, sellPrice: Number(e.target.value)})}
 					/>
-				</Form.Group>
-			</Form.Row>
-
-			<Form.Row>
-				<Form.Group as={Col} id={uuid()}>
-					<Form.Label>Ztraceno</Form.Label>
-					<Form.Control
-						type="number"
-						value={formData.lost}
-						required
-						onChange={e=>setFormData({...formData, lost: Number(e.target.value)})}
-					/>
-				</Form.Group>
-			</Form.Row>
-
-			<Form.Row>
-				<Form.Group as={Col} id={uuid()}>
-					<Form.Label>Nakoupeno</Form.Label>
-					<Form.Control
-						type="number"
-						value={formData.bought}
-						required
-						onChange={e=>setFormData({...formData, bought: Number(e.target.value)})}
-					/>
+					<Form.Text>
+						Nákupní cena za kus: <b>{(formData.buyPrice / formData.count).toFixed(2).replace('.', ',')} Kč</b>
+					</Form.Text>
 				</Form.Group>
 			</Form.Row>
 

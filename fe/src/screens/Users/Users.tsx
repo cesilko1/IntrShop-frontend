@@ -2,7 +2,10 @@ import React, {useEffect, useState, useContext} from "react";
 import TokenContext from "contexts/TokenContext";
 import UserApi from "api/UserApi";
 import IUser from "interfaces/User";
-import { Card, Container, Table } from 'react-bootstrap';
+import { Card, Container, Table, Row, Col } from 'react-bootstrap';
+import UserTableItem from 'components/UserTableItem/UserTableItem';
+import NewUser from 'components/NewUser/NewUser';
+
 
 const Users: React.FC = () => {
 	const [Token,] = useContext(TokenContext);
@@ -14,7 +17,6 @@ const Users: React.FC = () => {
 
 	const LoadUsers = async () => {
 		const response = await UserApi.getUsers(Token);
-		console.log(response.data);
 		setUsers(response.data);
 	}
 
@@ -22,13 +24,22 @@ const Users: React.FC = () => {
 		<Container>
 			<Card className="section-card">
 				<Card.Header>
-					<h3>Uživatelé</h3>
+					<Row>
+						<Col>
+							<h3>Uživatelé</h3>
+						</Col>
+
+						<Col xs="auto">
+							<NewUser/>
+						</Col>
+					</Row>
 				</Card.Header>
 
 				<Card.Body>
 					<Table responsive striped bordered hover>
 						<thead>
 							<tr>
+								<th></th>
 								<th>Email</th>
 								<th>Oprávnění</th>
 								<th>Datum registrace</th>
@@ -38,11 +49,7 @@ const Users: React.FC = () => {
 							{
 								users.map((user: IUser, key: number)=>{
 									return(
-										<tr>
-											<td>{user.email}</td>
-											<td>{user.privileges}</td>
-											<td>{user.createdAt}</td>
-										</tr>
+										<UserTableItem user={user} reloadData={LoadUsers} key={key}/>
 									);
 								})
 							}

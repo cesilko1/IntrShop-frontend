@@ -17,10 +17,10 @@ class UserApi {
 		}
 	}
 
-	async register(registerProps: IRegister): Promise<AxiosResponse<any>> {
+	async register(registerProps: IRegister, authToken: string): Promise<AxiosResponse<any>> {
 		this.token = axios.CancelToken.source();
 		try {
-			return await api.post('/user/register', registerProps, {cancelToken: this.token.token});
+			return await api.post('/user/register', registerProps, {cancelToken: this.token.token, headers: {'token': authToken}});
 		}
 		catch(error) {
 			return (error as AxiosError)?.response as AxiosResponse<any>;
@@ -47,6 +47,15 @@ class UserApi {
 		}
 	}
 
+	async deleteUserById(id: string, authToken: string): Promise<AxiosResponse<string>> {
+		this.token = axios.CancelToken.source();
+		try {
+			return await api.delete('/user/'+id, {cancelToken: this.token.token, headers: {'token': authToken}});
+		}
+		catch(error) {
+			return (error as AxiosError)?.response as AxiosResponse<string>;
+		}
+	}
 
 	cancel(): void {
 		if(typeof this.token !== 'undefined') this.token.cancel();
