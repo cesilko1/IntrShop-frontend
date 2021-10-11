@@ -2,6 +2,19 @@
 
 
 ::-webkit-scrollbar {
+	background-color: $shadow-color;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-button {
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: $tertiary-color;
+	border-radius: 5px;
+}
+
+body::-webkit-scrollbar {
 	width: 0;
 	height: 0;
 }

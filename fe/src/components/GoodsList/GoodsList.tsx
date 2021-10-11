@@ -68,7 +68,7 @@ const GoodsList: React.FC = () => {
 			onChange={e=>HandleSearch(e.target.value)}
 		/>
 
-		<Table responsive="md" striped bordered hover>
+		<Table responsive striped bordered hover>
 			<thead>
 				<tr className={scss.tableHeader}>
 					<th></th>
