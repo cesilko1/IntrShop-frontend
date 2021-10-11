@@ -21,7 +21,7 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 	const [Token,] = useContext(TokenContext);
 	const [,setGlobalAlert] = useContext(GlobalAlertContext);
 	const [,setGoodsUpdate] = useContext(GoodsUpdateContext);
-	const margin = useMemo(()=>{return ((props.item.sellPrice * 1000 - props.item.buyPrice * 1000) / 1000).toFixed(2)}, []);
+	const margin = useMemo(()=>{return ((props.item.sellPrice * 1000 - props.item.buyPrice * 1000) / 1000).toFixed(2)}, [props.item.sellPrice, props.item.buyPrice]);
 
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [looseCount, setLooseCOunt] = useState<number>(1);
