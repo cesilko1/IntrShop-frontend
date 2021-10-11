@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
 import config from 'config';
 
-import { HOME, GOODS, SALES, USERS } from 'paths';
+import { HOME, GOODS, SALES, USERS, OVERVIEW } from 'paths';
 import IUser from 'interfaces/User';
 
 const NavbarMenu: React.FC = () => {
@@ -73,6 +73,9 @@ const NavbarMenu: React.FC = () => {
 							</Nav.Link>
 							<Nav.Link as={Link} to={USERS} onClick={()=>setExpanded(false)} className={scss.navLink}>
 								Uživatelé
+							</Nav.Link>
+							<Nav.Link as={Link} to={OVERVIEW} onClick={()=>setExpanded(false)} className={scss.navLink}>
+								Přehledy
 							</Nav.Link>
 						</PrivilegesManager>
 					</Nav>

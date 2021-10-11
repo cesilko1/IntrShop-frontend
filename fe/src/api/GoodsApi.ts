@@ -66,6 +66,16 @@ class GoodsApi {
 		}
 	}
 
+	async buyNewGoodsById(id: string, count: number, price: number, authToken: string): Promise<AxiosResponse<string>> {
+		this.token = axios.CancelToken.source();
+		try {
+			return await api.put('/goods/'+id+'/buy', {count: count, price: price}, {cancelToken: this.token.token, headers: {'token': authToken}});
+		}
+		catch(error) {
+			return (error as AxiosError)?.response as AxiosResponse<string>;
+		}
+	}
+
 	cancel(): void {
 		if(typeof this.token !== 'undefined') this.token.cancel();
 	}

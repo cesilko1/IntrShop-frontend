@@ -45,7 +45,6 @@ const GoodsList: React.FC = () => {
 	}
 
 	const ReverseData = () => {
-		console.log("sorting");
 		const sortedData = [...goods].reverse();
 		setGoods(sortedData);
 	}
@@ -76,6 +75,7 @@ const GoodsList: React.FC = () => {
 					<th>Skladem</th>
 					<th>Prodáno</th>
 					<th>Ztraceno</th>
+					<th>Nakoupeno</th>
 					<th>Prodejní cena</th>
 					<th>Nákupní cena</th>
 					<th>Marže</th>

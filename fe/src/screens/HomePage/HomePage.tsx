@@ -4,7 +4,7 @@ import { GoodsInCartProvider } from 'contexts/GoodsInCart';
 import GoodsOffer from 'components/GoodsOffer/GoodsOffer';
 import Cart from 'components/Cart/Cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faBox } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faCubes } from '@fortawesome/free-solid-svg-icons';
 
 const HomePage: React.FC = () => {
 	return(
@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
 				<Row xs={1} md={2}>
 					<Col xs={{order: 'last'}} md={{order: 'first'}} className="mb-4">
 						<h3 className="mb-3">
-							<FontAwesomeIcon icon={faBox} className="mr-3"/>
+							<FontAwesomeIcon icon={faCubes} className="mr-3"/>
 							Zboží v nabídce
 						</h3>
 						<GoodsOffer/>

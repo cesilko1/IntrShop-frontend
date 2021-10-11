@@ -3,7 +3,7 @@ import IGoods from "interfaces/Goods";
 import config from 'config';
 import { Button, ButtonToolbar, ButtonGroup, Modal, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faBan } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faPlus, faTrashAlt, faPen } from "@fortawesome/free-solid-svg-icons";
 import GoodsUpdateContext from 'contexts/GoodsUpdateContext';
 import GoodsApi from 'api/GoodsApi';
 import TokenContext from "contexts/TokenContext";
@@ -54,20 +54,47 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 		}
 	}
 
+	const deleteItem = async () => {
+		if(!props.item._id) return false;
+
+		const response = await GoodsApi.deleteGoodsById(props.item._id, Token);
+
+		if(response.status === 200) {
+			setGlobalAlert({
+				open: true,
+				variant: "warning",
+				content: response.data
+			});
+			props.reloadTable();
+		}
+	}
+
 	return(
 		<>
 			<tr>
 				<td>
 					<ButtonToolbar className="flex-nowrap">
 						<ButtonGroup className="mr-1">
-							<Button size="sm" onClick={()=>OpenItemMenu()}>
-								<FontAwesomeIcon icon={faEdit}/>
+							<Button size="sm" variant="success" onClick={()=>setOpenModal(!openModal)}>
+								<FontAwesomeIcon icon={faPlus}/>
+							</Button>
+						</ButtonGroup>
+
+						<ButtonGroup className="mr-1">
+							<Button size="sm" variant="warning" onClick={()=>setOpenModal(!openModal)}>
+								<FontAwesomeIcon icon={faBan}/>
+							</Button>
+						</ButtonGroup>
+
+						<ButtonGroup className="mr-1">
+							<Button size="sm" variant="primary" onClick={()=>OpenItemMenu()}>
+								<FontAwesomeIcon icon={faPen}/>
 							</Button>
 						</ButtonGroup>
 
 						<ButtonGroup>
-							<Button size="sm" variant="warning" onClick={()=>setOpenModal(!openModal)}>
-								<FontAwesomeIcon icon={faBan}/>
+							<Button size="sm" variant="danger" onDoubleClick={()=>deleteItem()}>
+								<FontAwesomeIcon icon={faTrashAlt}/>
 							</Button>
 						</ButtonGroup>
 					</ButtonToolbar>
@@ -83,6 +110,9 @@ const GoodsListItem: React.FC<IProps> = (props: IProps) => {
 				</td>
 				<td>
 					{props.item.lost} ks
+				</td>
+				<td>
+					{props.item.bought} ks
 				</td>
 				<td>
 					{props.item.sellPrice} {config.currency}

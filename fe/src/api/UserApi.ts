@@ -2,6 +2,7 @@ import api from 'utils/api';
 import axios, { AxiosError, AxiosResponse, CancelTokenSource } from 'axios';
 
 import IRegister from 'interfaces/Register';
+import IUser from 'interfaces/User';
 
 class UserApi {
 	private token?: CancelTokenSource;
@@ -33,6 +34,16 @@ class UserApi {
 		}
 		catch(error) {
 			return (error as AxiosError)?.response as AxiosResponse<any>;
+		}
+	}
+
+	async getUsers(authToken: string): Promise<AxiosResponse<IUser[]>> {
+		this.token = axios.CancelToken.source();
+		try {
+			return await api.get('/user/users', {cancelToken: this.token.token, headers: {'token': authToken}});
+		}
+		catch(error) {
+			return (error as AxiosError)?.response as AxiosResponse<IUser[]>;
 		}
 	}
 

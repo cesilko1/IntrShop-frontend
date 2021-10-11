@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
-	const clearForm: IGoods = {name: "", sellPrice: 0, buyPrice: 0, inStock: 0, lost: 0, sold: 0}
+	const clearForm: IGoods = {name: "", sellPrice: 0, buyPrice: 0, inStock: 0, lost: 0, sold: 0, bought: 0}
 	const token = useContext(TokenContext)[0];
 	const setGlobalAlert = useContext(GlobalAlertContext)[1];
 
@@ -98,6 +98,18 @@ const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
 						value={formData.lost}
 						required
 						onChange={e=>setFormData({...formData, lost: Number(e.target.value)})}
+					/>
+				</Form.Group>
+			</Form.Row>
+
+			<Form.Row>
+				<Form.Group as={Col} id={uuid()}>
+					<Form.Label>Nakoupeno</Form.Label>
+					<Form.Control
+						type="number"
+						value={formData.bought}
+						required
+						onChange={e=>setFormData({...formData, bought: Number(e.target.value)})}
 					/>
 				</Form.Group>
 			</Form.Row>

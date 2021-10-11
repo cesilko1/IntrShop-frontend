@@ -6,6 +6,7 @@ export default interface IGoods {
 	inStock: number;
 	lost: number;
 	sold: number;
+	bought: number;
 }
 
 export interface IGoodsUpdate {
@@ -14,4 +15,6 @@ export interface IGoodsUpdate {
 	buyPrice?: number;
 	inStock?: number;
 	lost?: number;
+	sold?: number;
+	bought?: number;
 }

@@ -104,6 +104,18 @@ const GoodsUpdateForm: React.FC<IProps> = (props: IProps) => {
 			</Form.Row>
 
 			<Form.Row>
+				<Form.Group as={Col} id={uuid()}>
+					<Form.Label>Nakoupeno</Form.Label>
+					<Form.Control
+						type="number"
+						value={goodsUpdate.bought}
+						required
+						onChange={e=>setGoodsUpdate({...goodsUpdate, bought: Number(e.target.value)})}
+					/>
+				</Form.Group>
+			</Form.Row>
+
+			<Form.Row>
 				<Form.Group as={Col}>
 					<Button variant="primary" type="submit">Uložit</Button>
 				</Form.Group>
