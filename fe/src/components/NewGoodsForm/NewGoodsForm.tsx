@@ -18,7 +18,7 @@ interface IFormData {
 }
 
 const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
-	const clearForm: IFormData = {name: "", count: 0, buyPrice: 0, sellPrice: 0};
+	const clearForm: IFormData = {name: "", count: 1, buyPrice: 0, sellPrice: 0};
 	const token = useContext(TokenContext)[0];
 	const setGlobalAlert = useContext(GlobalAlertContext)[1];
 
@@ -77,6 +77,7 @@ const NewGoodsForm: React.FC<IProps> = (props: IProps) => {
 				<Form.Group as={Col} controlId={uuid()}>
 					<Form.Label>Nakoupený počet</Form.Label>
 					<Form.Control
+						min={1}
 						type="number"
 						value={formData.count}
 						required

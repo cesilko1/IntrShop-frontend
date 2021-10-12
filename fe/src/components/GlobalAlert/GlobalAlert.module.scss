@@ -3,7 +3,7 @@
 $alert-width: 30rem;
 
 .alert {
-	position: absolute;
+	position: fixed;
 	width: $alert-width;
 	top: 2rem;
 	left: calc(50% - #{$alert-width/2});
