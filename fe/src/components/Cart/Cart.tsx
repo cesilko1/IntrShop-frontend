@@ -103,7 +103,7 @@ const Cart: React.FC = () => {
 										&nbsp;
 										<b>{CartStorage.getCurrentPrice()} {config.currency}</b>
 										&nbsp;
-										{payByCard ? <CardIcon/> : <CashIcon/>}
+										<FontAwesomeIcon icon={payByCard ? faCreditCard : faCoins}/>
 									</h6>
 								</Col>
 							</Row>
@@ -128,8 +128,5 @@ const EmptyCart: React.FC = () => {
 		</b>
 	);
 }
-
-const CashIcon = () => {return(<FontAwesomeIcon icon={faCoins}/>);}
-const CardIcon = () => {return(<FontAwesomeIcon icon={faCreditCard}/>);}
 
 export default Cart;

@@ -1,8 +1,9 @@
 import api from 'utils/api';
 import axios, { AxiosError, AxiosResponse, CancelTokenSource } from 'axios';
 
-import Isale, { ISaleItem } from 'interfaces/Sales';
+import Isale, { ISaleDetail, ISaleItem } from 'interfaces/Sales';
 import ISales from 'interfaces/Sales';
+import IGoods from 'interfaces/Goods';
 
 class SaleApi {
 	private token?: CancelTokenSource;
@@ -37,13 +38,13 @@ class SaleApi {
 		}
 	}
 
-	async getSaleItemsById(id: string, authToken: string): Promise<AxiosResponse<ISaleItem[]>> {
+	async getSaleItemsById(id: string, authToken: string): Promise<AxiosResponse<ISaleDetail[]>> {
 		this.token = axios.CancelToken.source();
 		try {
 			return await api.get('/sale/'+id+'/items', {cancelToken: this.token.token, headers: {'token': authToken}});
 		}
 		catch(error) {
-			return (error as AxiosError)?.response as AxiosResponse<ISaleItem[]>;
+			return (error as AxiosError)?.response as AxiosResponse<ISaleDetail[]>;
 		}
 	}
 

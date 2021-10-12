@@ -32,8 +32,8 @@ const Sales: React.FC = () => {
 				</Col>
 			</Row>
 
-			<Row>
-				<Col>
+			<Row className="justify-content-md-center">
+				<Col md={7} xl={5}>
 					{
 						sales.map((item: ISales, key: number) => {
 							if(!item.date) return(<SaleItem item={item} key={key}/>);
@@ -44,7 +44,7 @@ const Sales: React.FC = () => {
 
 								return(
 									<div key={key}>
-										<h6 className="ml-3 mt-5"><b>{date.getDate()}. {date.getMonth()}. {date.getFullYear()}</b></h6>
+										<h6 className="ml-4 mt-5"><b>{date.getDate()}. {date.getMonth()}. {date.getFullYear()}</b></h6>
 										<SaleItem item={item}/>
 									</div>
 								);
