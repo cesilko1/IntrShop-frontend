@@ -38,7 +38,7 @@ const SaleItem: React.FC<IProps> = (props: IProps) => {
 				</Row>
 			</Card.Body>
 
-			<Collapse in={open} mountOnEnter unmountOnExit>
+			<Collapse in={open} mountOnEnter unmountOnExit timeout={0}>
 				<Card.Body>
 					<SaleItemDetail saleId={props.item._id}/>
 				</Card.Body>
