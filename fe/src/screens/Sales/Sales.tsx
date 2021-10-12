@@ -8,7 +8,8 @@ import SaleItem from 'components/SaleItem/SaleItem';
 const Sales: React.FC = () => {
 	const [Token,] = useContext(TokenContext);
 	const [sales, setSales] = useState<ISales[]>([]);
-	const lastDate = useRef<Number>(0);
+	const lastDate = useRef<number>(0);
+	const salesCount = useRef<number>(0);
 
 	useEffect(()=>{
 		LoadData();
@@ -18,6 +19,7 @@ const Sales: React.FC = () => {
 	const LoadData = async () => {
 		const response = await SaleApi.getSales(Token);
 		setSales(response.data.reverse());
+		salesCount.current = sales.length;
 	}
 
 	return(
@@ -37,14 +39,14 @@ const Sales: React.FC = () => {
 							if(!item.date) return(<SaleItem item={item} key={key}/>);
 							const date = new Date(item.date)
 
-							if(lastDate.current !== date.getDay()) {
-								lastDate.current = date.getDay();
+							if(lastDate.current !== date.getDate()) {
+								lastDate.current = date.getDate();
 
 								return(
-									<>
-										<h6 className="ml-3 mt-5"><b>{date.getDay()}. {date.getMonth()}. {date.getFullYear()}</b></h6>
-										<SaleItem item={item} key={key}/>
-									</>
+									<div key={key}>
+										<h6 className="ml-3 mt-5"><b>{date.getDate()}. {date.getMonth()}. {date.getFullYear()}</b></h6>
+										<SaleItem item={item}/>
+									</div>
 								);
 							}
 
