@@ -64,10 +64,10 @@ const NavbarMenu: React.FC = () => {
 						<Nav.Link as={Link} to={GOODS} onClick={()=>setExpanded(false)} className={scss.navLink}>
 							Zboží
 						</Nav.Link>
+						<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
+							Prodeje
+						</Nav.Link>
 						<PrivilegesManager privileges={0}>
-							<Nav.Link as={Link} to={SALES} onClick={()=>setExpanded(false)} className={scss.navLink}>
-								Prodeje
-							</Nav.Link>
 							<Nav.Link as={Link} to={USERS} onClick={()=>setExpanded(false)} className={scss.navLink}>
 								Uživatelé
 							</Nav.Link>
