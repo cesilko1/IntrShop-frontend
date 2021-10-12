@@ -79,7 +79,7 @@ const Cart: React.FC = () => {
 				<Card.Footer>
 					<Row>
 						<Col xs="auto">
-							<Button className="circle-button" variant="danger" onClick={()=>clearCart()}>
+							<Button className="circle-button" variant="danger" onDoubleClick={()=>clearCart()}>
 								<FontAwesomeIcon icon={faTrashAlt}/>
 							</Button>
 						</Col>
@@ -110,7 +110,7 @@ const Cart: React.FC = () => {
 						</Col>
 
 						<Col xs="auto">
-							<Button className="circle-button" variant="success" onClick={()=>saveSale()}>
+							<Button className="circle-button" variant="success" onDoubleClick={()=>saveSale()}>
 								<FontAwesomeIcon icon={faCheck}/>
 							</Button>
 						</Col>
