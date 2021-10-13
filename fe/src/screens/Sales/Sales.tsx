@@ -1,10 +1,9 @@
 import React, {useEffect, useContext, useState, useRef} from "react";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import TokenContext from 'contexts/TokenContext';
 import SaleApi from "api/SaleApi";
 import ISales from "interfaces/Sales";
 import SaleItem from 'components/SaleItem/SaleItem';
-import Config from "config";
 
 const Sales: React.FC = () => {
 	const [Token,] = useContext(TokenContext);
@@ -13,6 +12,7 @@ const Sales: React.FC = () => {
 
 	useEffect(()=>{
 		LoadData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 

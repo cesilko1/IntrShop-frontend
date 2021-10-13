@@ -1,6 +1,6 @@
-import React, {useMemo, useState, useRef} from "react";
+import React, {useMemo, useState } from "react";
 import ISales from 'interfaces/Sales';
-import { Card, Row, Col, Collapse, Button } from 'react-bootstrap';
+import { Card, Row, Col, Collapse } from 'react-bootstrap';
 import config from 'config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins } from "@fortawesome/free-solid-svg-icons";

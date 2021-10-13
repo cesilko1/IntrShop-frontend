@@ -3,15 +3,11 @@ import TokenContext from "contexts/TokenContext";
 import GoodsApi from "api/GoodsApi";
 import IGoods from "interfaces/Goods";
 import GoodsListItem from 'components/GoodsListItem/GoodsListItem';
-import { Table, Modal, Button, FormControl } from 'react-bootstrap';
+import { Table, Modal, FormControl } from 'react-bootstrap';
 import GoodsUpdateForm from 'components/GoodsUpdateForm/GoodsUpdateForm';
-import GoodsUpdateContext from "contexts/GoodsUpdateContext";
-import GlobalAlertContext from 'contexts/GlobalAlertContext';
 import scss from './GoodsList.module.scss';
 
 const GoodsList: React.FC = () => {
-	const [,setGlobalAlert] = useContext(GlobalAlertContext);
-	const [goodsUpdate,] = useContext(GoodsUpdateContext);
 	const [token,] = useContext(TokenContext);
 	const [goods, setGoods] = useState<IGoods[]>([]);
 	const [openModal, setOpenModal] = useState<boolean>(false);
@@ -19,6 +15,7 @@ const GoodsList: React.FC = () => {
 
 	useEffect(()=>{
 		LoadData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const LoadData = async () => {

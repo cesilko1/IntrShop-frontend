@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'index.scss';
 import { TokenProvider, TokenContext } from 'contexts/TokenContext';
 import { UserProvider, UserContext } from 'contexts/UserContext';
-import GlobalAlertContext, { GlobalAlertProvider } from 'contexts/GlobalAlertContext';
+import { GlobalAlertProvider } from 'contexts/GlobalAlertContext';
 import Login from 'screens/Login/Login';
 import NavbarMenu from 'components/Navbar/NavbarMenu';
 import UserApi from 'api/UserApi';
@@ -23,6 +23,7 @@ const App: React.FC = () => {
 			setToken(localStorage.token);
 		}
 		if(localStorage.token) loadData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 

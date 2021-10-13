@@ -1,5 +1,5 @@
 import ICartData from 'interfaces/CartData';
-import ISales, { ISaleItem } from 'interfaces/Sales';
+import { ISaleItem } from 'interfaces/Sales';
 
 class CartStorage {
 	private cartItemName: string = 'cart';

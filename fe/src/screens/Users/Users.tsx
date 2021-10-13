@@ -13,6 +13,7 @@ const Users: React.FC = () => {
 
 	useEffect(()=>{
 		LoadUsers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const LoadUsers = async () => {

@@ -32,11 +32,12 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 
 		loadData();
 		return ()=>{SaleApi.cancel()}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return(
 		<>
-			<Row className="mb-2 text-success">
+			<Row className="mb-3 text-success">
 				<Col>
 					Marže nákupu: {margin} {Config.currency}
 				</Col>

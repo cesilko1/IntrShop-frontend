@@ -14,10 +14,12 @@ const GoodsOffer: React.FC = () => {
 
 	useEffect(()=>{
 		LoadData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(()=>{
 		LoadData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goodsInCart]);
 
 	const LoadData = async () => {

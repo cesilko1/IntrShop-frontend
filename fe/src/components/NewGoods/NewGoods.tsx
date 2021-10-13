@@ -1,6 +1,5 @@
-import React, {useState, useContext } from "react";
-import { TokenContext } from 'contexts/TokenContext';
-import { Modal, Button, Card } from 'react-bootstrap';
+import React, {useState } from "react";
+import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import NewGoodsForm from 'components/NewGoodsForm/NewGoodsForm';

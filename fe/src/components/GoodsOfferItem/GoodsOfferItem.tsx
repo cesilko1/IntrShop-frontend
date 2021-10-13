@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import IGoods from 'interfaces/Goods';
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +21,7 @@ const GoodsOffer: React.FC<IProps> = (props: IProps) => {
 	}	
 
 	return(
-		<Card className="section-card">
+		<Card className="section-card" onDoubleClick={AddToCart}>
 			<Card.Body as={Row}>
 				<Col>
 					<Row>

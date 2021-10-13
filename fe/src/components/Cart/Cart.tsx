@@ -1,7 +1,7 @@
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GoodsInCart from 'contexts/GoodsInCart';
 import { CreateSaleProvider } from 'contexts/CreateSaleContext';
-import { Card, Button, Row, Col, ToggleButton, FormControl, Form } from 'react-bootstrap';
+import { Card, Button, Row, Col, Form } from 'react-bootstrap';
 import CartContent from 'components/CartContent/CartContent';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCoins, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
