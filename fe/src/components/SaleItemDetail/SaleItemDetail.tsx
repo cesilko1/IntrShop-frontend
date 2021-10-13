@@ -70,7 +70,7 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 		<>
 			<Row className="mb-3">
 				<Col>
-					<span className="text-success">Marže nákupu: <b>{margin} {Config.currency}</b></span>
+					<span className="text-success">Marže: <b>{margin} {Config.currency}</b></span>
 				</Col>
 
 				{
