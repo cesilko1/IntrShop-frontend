@@ -4,8 +4,10 @@ import TokenContext from 'contexts/TokenContext';
 import SaleApi from "api/SaleApi";
 import ISales from "interfaces/Sales";
 import SaleItem from 'components/SaleItem/SaleItem';
+import ReloadSalesContext from 'contexts/ReloadSalesContext';
 
 const Sales: React.FC = () => {
+	const [reloadSales,] = useContext(ReloadSalesContext);
 	const [Token,] = useContext(TokenContext);
 	const [sales, setSales] = useState<ISales[]>([]);
 	const lastDate = useRef<number>(0);
@@ -13,7 +15,7 @@ const Sales: React.FC = () => {
 	useEffect(()=>{
 		LoadData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [reloadSales]);
 
 
 	const LoadData = async () => {

@@ -5,6 +5,7 @@ import 'index.scss';
 import { TokenProvider, TokenContext } from 'contexts/TokenContext';
 import { UserProvider, UserContext } from 'contexts/UserContext';
 import { GlobalAlertProvider } from 'contexts/GlobalAlertContext';
+import { ReloadSalesProvider } from 'contexts/ReloadSalesContext';
 import Login from 'screens/Login/Login';
 import NavbarMenu from 'components/Navbar/NavbarMenu';
 import UserApi from 'api/UserApi';
@@ -53,11 +54,13 @@ const App: React.FC = () => {
 
 
 ReactDOM.render(
-	<GlobalAlertProvider>
-	<UserProvider>
-		<TokenProvider>
-			<App/>
-		</TokenProvider>
-	</UserProvider>
-	</GlobalAlertProvider>
+	<ReloadSalesProvider>
+		<GlobalAlertProvider>
+			<UserProvider>
+				<TokenProvider>
+					<App/>
+				</TokenProvider>
+			</UserProvider>
+		</GlobalAlertProvider>
+	</ReloadSalesProvider>
 , document.getElementById('root'));
