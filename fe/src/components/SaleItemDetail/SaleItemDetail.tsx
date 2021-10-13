@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from "react";
+import React, {useEffect, useContext, useState, useMemo} from "react";
 import { Row, Col } from 'react-bootstrap';
 import TokenContext from 'contexts/TokenContext';
 import SaleApi from "api/SaleApi";
@@ -13,6 +13,15 @@ interface IProps {
 const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 	const [Token,] = useContext(TokenContext);
 	const [soldItems, setSoldItems] = useState<ISaleDetail[]>([]);
+	const margin = useMemo(()=>{
+		var marginPrice = 0;
+		
+		for(var i=0; i<soldItems.length; i+=1) {
+			marginPrice += (soldItems[i].price - soldItems[i].goods.buyPrice) * soldItems[i].count;
+		}
+		return marginPrice.toFixed(2).replace('.', ',');
+
+	}, [soldItems]);
 
 	useEffect(()=>{
 		const loadData = async () => {
@@ -27,6 +36,11 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 
 	return(
 		<>
+			<Row className="mb-2 text-success">
+				<Col>
+					Marže nákupu: {margin} {Config.currency}
+				</Col>
+			</Row>
 			{
 				soldItems.map((item: ISaleDetail, key: number) => {
 					return(

@@ -13,7 +13,6 @@ interface IProps {
 
 const SaleItem: React.FC<IProps> = (props: IProps) => {
 	const [open, setOpen] = useState<boolean>(false);
-	const ariaControls = useRef<HTMLDivElement>(null);
 
 	const date: Date = useMemo(()=>{
 		if(!props.item.date) return new Date();
