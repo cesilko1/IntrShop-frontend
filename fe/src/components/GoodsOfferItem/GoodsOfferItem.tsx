@@ -36,7 +36,7 @@ const GoodsOffer: React.FC<IProps> = (props: IProps) => {
 						<Col as="h6"
 						className={(props.itemData.inStock > 0) ? "text-success" : "text-danger"}
 						>
-							Skladem: {props.itemData.inStock} ks
+							Skladem: <b>{props.itemData.inStock} ks</b>
 						</Col>
 					</Row>
 				</Col>

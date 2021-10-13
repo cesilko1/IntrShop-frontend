@@ -4,7 +4,8 @@ import IConfig from 'interfaces/Config';
 const Config: IConfig = {
 	apiBaseUrl: 'https://intrshop.api.raska-vilem.cz',
 	dev: false,
-	currency: "Kč"
+	currency: "Kč",
+	feeGP: 1.99
 }
 
 // Development environment

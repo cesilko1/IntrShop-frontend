@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import TokenContext from 'contexts/TokenContext';
 import ReloadSalesContext from "contexts/ReloadSalesContext";
 import SaleApi from "api/SaleApi";
-import { ISaleDetail } from "interfaces/Sales";
+import ISales, { ISaleDetail } from "interfaces/Sales";
 import scss from './SaleItemDetail.module.scss';
 import Config from "config";
 import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
@@ -12,7 +12,7 @@ import GlobalAlertContext from 'contexts/GlobalAlertContext';
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
-	saleId?: string;
+	sale: ISales;
 	close: any;
 }
 
@@ -21,20 +21,28 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 	const [reloadSales, setReloadSales] = useContext(ReloadSalesContext);
 	const [Token,] = useContext(TokenContext);
 	const [soldItems, setSoldItems] = useState<ISaleDetail[]>([]);
+
+	const fee = useMemo(()=>{
+		if(!props.sale.price) return 0;
+		return (props.sale.price * Config.feeGP / 100).toFixed(2).replace('.', ',');
+	}, [props.sale.price]);
+
 	const margin = useMemo(()=>{
 		var marginPrice = 0;
 		
 		for(var i=0; i<soldItems.length; i+=1) {
 			marginPrice += (soldItems[i].price - soldItems[i].goods.buyPrice) * soldItems[i].count;
 		}
+
 		return marginPrice.toFixed(2).replace('.', ',');
 
 	}, [soldItems]);
 
+
 	useEffect(()=>{
 		const loadData = async () => {
-			if(!props.saleId) return false;
-			const response = await SaleApi.getSaleItemsById(props.saleId, Token);
+			if(!props.sale._id) return false;
+			const response = await SaleApi.getSaleItemsById(props.sale._id, Token);
 			setSoldItems(response.data);
 		}
 
@@ -44,8 +52,8 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 	}, []);
 
 	const DeleteSale = async () => {
-		if(!props.saleId) return false;
-		const response = await SaleApi.deleteSaleById(props.saleId, Token);
+		if(!props.sale._id) return false;
+		const response = await SaleApi.deleteSaleById(props.sale._id, Token);
 
 		if(response.status === 200) {
 			props.close(false);
@@ -62,8 +70,17 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 		<>
 			<Row className="mb-3">
 				<Col>
-					<span className="text-success">Marže nákupu: {margin} {Config.currency}</span>
+					<span className="text-success">Marže nákupu: <b>{margin} {Config.currency}</b></span>
 				</Col>
+
+				{
+					props.sale.card ?
+						<Col>
+							Poplatek GP: <b>{fee} {Config.currency}</b>
+						</Col>
+						:
+						""
+				}
 
 				<PrivilegesManager privileges={0}>
 					<Col xs="auto">
