@@ -9,7 +9,7 @@ import Config from "config";
 import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GlobalAlertContext from 'contexts/GlobalAlertContext';
-import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
 	saleId?: string;
@@ -61,14 +61,14 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 	return(
 		<>
 			<Row className="mb-3">
-				<Col className="text-success">
-					Marže nákupu: {margin} {Config.currency}
+				<Col>
+					<span className="text-success">Marže nákupu: {margin} {Config.currency}</span>
 				</Col>
 
 				<PrivilegesManager privileges={0}>
 					<Col xs="auto">
-						<Button size="sm" variant="danger" onClick={DeleteSale}>
-							<FontAwesomeIcon icon={faWindowClose}/>
+						<Button size="sm" variant="warning" onClick={DeleteSale}>
+							<FontAwesomeIcon icon={faBan}/>
 						</Button>
 					</Col>
 				</PrivilegesManager>
