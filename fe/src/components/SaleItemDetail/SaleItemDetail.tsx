@@ -76,7 +76,7 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 				{
 					props.sale.card ?
 						<Col>
-							Poplatek GP: <b>{fee} {Config.currency}</b>
+							GP: <b>{fee} {Config.currency}</b>
 						</Col>
 						:
 						""

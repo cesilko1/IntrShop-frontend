@@ -1,50 +1,48 @@
-import React, { useState, useContext, FormEvent } from "react";
+import React from "react";
 import { Form, Col, Button } from "react-bootstrap";
-import UserApi from 'api/UserApi';
-import { TokenContext } from 'contexts/TokenContext';
-import { UserContext } from 'contexts/UserContext';
-import GlobalAlertContext from 'contexts/GlobalAlertContext';
 import scss from './Login.module.scss';
+import LoginLogic from './LoginLogic';
 
 
-interface ILogin {
-	email: string;
-	password: string;
-}
+// interface ILogin {
+// 	email: string;
+// 	password: string;
+// }
 
 const Login: React.FC = () => {
-	const clearForm: ILogin = {email: "", password: ""};
-	const setToken = useContext(TokenContext)[1];
-	const [,setUser]  = useContext(UserContext);
-	const setGlobalAlert = useContext(GlobalAlertContext)[1];
+	// const clearForm: ILogin = {email: "", password: ""};
+	// const setToken = useContext(TokenContext)[1];
+	// const [,setUser]  = useContext(UserContext);
+	// const setGlobalAlert = useContext(GlobalAlertContext)[1];
 
-	const [formData, setFormData]         = useState<ILogin>(clearForm);
-	const [validated, setValidated]       = useState<boolean>(false);
+	// const [formData, setFormData]         = useState<ILogin>(clearForm);
+	// const [validated, setValidated]       = useState<boolean>(false);
 
-	const HandleLogin = async (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const form: HTMLFormElement = event.currentTarget;
+	// const HandleLogin = async (event: FormEvent<HTMLFormElement>) => {
+	// 	event.preventDefault();
+	// 	const form: HTMLFormElement = event.currentTarget;
 
-		if(!form.checkValidity()) {setValidated(true); return false;}
+	// 	if(!form.checkValidity()) {setValidated(true); return false;}
 
-		const response = await UserApi.login(formData);
+	// 	const response = await UserApi.login(formData);
 
-		if(response.status !== 200) {
-			setGlobalAlert({
-				open: true,
-				variant: "danger",
-				content: response.data
-			});
-			setValidated(false);
-			return false;
-		}
-		localStorage.setItem('token', response.headers.token);
-		setUser(response.data);
-		setToken(response.headers.token);
-	}
+	// 	if(response.status !== 200) {
+	// 		setGlobalAlert({
+	// 			open: true,
+	// 			variant: "danger",
+	// 			content: response.data
+	// 		});
+	// 		setValidated(false);
+	// 		return false;
+	// 	}
+	// 	localStorage.setItem('token', response.headers.token);
+	// 	setUser(response.data);
+	// 	setToken(response.headers.token);
+	// }
+	const logic = LoginLogic();
 
 	return(
-		<Form className={scss.form} noValidate validated={validated} onSubmit={HandleLogin}>
+		<Form className={scss.form} noValidate validated={logic.validated} onSubmit={logic.HandleLogin}>
 			
 			<h1 className={scss.heading}>IntrShop</h1>
 
@@ -54,8 +52,8 @@ const Login: React.FC = () => {
 						type="email"
 						required
 						placeholder="Email"
-						value={formData.email}
-						onChange={e=>setFormData({...formData, email: e.target.value})}
+						value={logic.formData.email}
+						onChange={e=>logic.setFormData({...logic.formData, email: e.target.value})}
 					/>
 				</Form.Group>
 			</Form.Row>
@@ -66,8 +64,8 @@ const Login: React.FC = () => {
 						type="password"
 						placeholder="Heslo"
 						required
-						value={formData.password}
-						onChange={e=>setFormData({...formData, password: e.target.value})}
+						value={logic.formData.password}
+						onChange={e=>logic.setFormData({...logic.formData, password: e.target.value})}
 					/>
 				</Form.Group>
 			</Form.Row>
