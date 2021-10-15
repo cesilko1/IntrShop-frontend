@@ -1,15 +1,13 @@
-import React, {useEffect, useContext, useState, useMemo} from "react";
+import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Row, Col, Button } from 'react-bootstrap';
-import TokenContext from 'contexts/TokenContext';
-import ReloadSalesContext from "contexts/ReloadSalesContext";
-import SaleApi from "api/SaleApi";
-import ISales, { ISaleDetail } from "interfaces/Sales";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
+import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
 import scss from './SaleItemDetail.module.scss';
 import Config from "config";
-import PrivilegesManager from 'components/PrivilegesManager/PrivilegesManager';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import GlobalAlertContext from 'contexts/GlobalAlertContext';
-import { faBan } from "@fortawesome/free-solid-svg-icons";
+import ISales, { ISaleDetail } from "interfaces/Sales";
+import SaleItemDetailLogic from './SaleItemDetailLogic';
+
 
 interface IProps {
 	sale: ISales;
@@ -17,54 +15,55 @@ interface IProps {
 }
 
 const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
-	const [,setGlobalAlert] = useContext(GlobalAlertContext);
-	const [reloadSales, setReloadSales] = useContext(ReloadSalesContext);
-	const [Token,] = useContext(TokenContext);
-	const [soldItems, setSoldItems] = useState<ISaleDetail[]>([]);
+	const {DeleteSale, soldItems, fee, margin} = SaleItemDetailLogic(props);
+	// const [,setGlobalAlert] = useContext(GlobalAlertContext);
+	// const [reloadSales, setReloadSales] = useContext(ReloadSalesContext);
+	// const [Token,] = useContext(TokenContext);
+	// const [soldItems, setSoldItems] = useState<ISaleDetail[]>([]);
 
-	const fee = useMemo(()=>{
-		if(!props.sale.price) return 0;
-		return (props.sale.price * Config.feeGP / 100).toFixed(2).replace('.', ',');
-	}, [props.sale.price]);
+	// const fee = useMemo(()=>{
+	// 	if(!props.sale.price) return 0;
+	// 	return (props.sale.price * Config.feeGP / 100).toFixed(2).replace('.', ',');
+	// }, [props.sale.price]);
 
-	const margin = useMemo(()=>{
-		var marginPrice = 0;
+	// const margin = useMemo(()=>{
+	// 	var marginPrice = 0;
 		
-		for(var i=0; i<soldItems.length; i+=1) {
-			marginPrice += (soldItems[i].price - soldItems[i].goods.buyPrice) * soldItems[i].count;
-		}
+	// 	for(var i=0; i<soldItems.length; i+=1) {
+	// 		marginPrice += (soldItems[i].price - soldItems[i].goods.buyPrice) * soldItems[i].count;
+	// 	}
 
-		return marginPrice.toFixed(2).replace('.', ',');
+	// 	return marginPrice.toFixed(2).replace('.', ',');
 
-	}, [soldItems]);
+	// }, [soldItems]);
 
 
-	useEffect(()=>{
-		const loadData = async () => {
-			if(!props.sale._id) return false;
-			const response = await SaleApi.getSaleItemsById(props.sale._id, Token);
-			setSoldItems(response.data);
-		}
+	// useEffect(()=>{
+	// 	const loadData = async () => {
+	// 		if(!props.sale._id) return false;
+	// 		const response = await SaleApi.getSaleItemsById(props.sale._id, Token);
+	// 		setSoldItems(response.data);
+	// 	}
 
-		loadData();
-		return ()=>{SaleApi.cancel()}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// 	loadData();
+	// 	return ()=>{SaleApi.cancel()}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
-	const DeleteSale = async () => {
-		if(!props.sale._id) return false;
-		const response = await SaleApi.deleteSaleById(props.sale._id, Token);
+	// const DeleteSale = async () => {
+	// 	if(!props.sale._id) return false;
+	// 	const response = await SaleApi.deleteSaleById(props.sale._id, Token);
 
-		if(response.status === 200) {
-			setReloadSales(!reloadSales);
-			setGlobalAlert({
-				open: true,
-				variant: "warning",
-				content: "Nákup zrušen."
-			});
-			props.close(false);
-		}
-	}
+	// 	if(response.status === 200) {
+	// 		setReloadSales(!reloadSales);
+	// 		setGlobalAlert({
+	// 			open: true,
+	// 			variant: "warning",
+	// 			content: "Nákup zrušen."
+	// 		});
+	// 		props.close(false);
+	// 	}
+	// }
 
 	return(
 		<>
