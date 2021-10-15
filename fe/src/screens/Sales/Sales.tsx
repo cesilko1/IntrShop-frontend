@@ -21,8 +21,8 @@ const Sales: React.FC = () => {
 	const LoadData = async () => {
 		lastDate.current = 0;
 		const response = await SaleApi.getSales(Token);
-		console.log(response);
-		setSales(response.data.reverse());
+		if(response.status === 200) setSales(response.data.reverse());
+		else setSales([]);
 	}
 
 	return(

@@ -56,13 +56,13 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 		const response = await SaleApi.deleteSaleById(props.sale._id, Token);
 
 		if(response.status === 200) {
-			props.close(false);
 			setReloadSales(!reloadSales);
 			setGlobalAlert({
 				open: true,
 				variant: "warning",
 				content: "Nákup zrušen."
 			});
+			props.close(false);
 		}
 	}
 
@@ -84,7 +84,7 @@ const SaleItemDetail: React.FC<IProps> = (props: IProps) => {
 
 				<PrivilegesManager privileges={0}>
 					<Col xs="auto">
-						<Button size="sm" variant="warning" onClick={DeleteSale}>
+						<Button size="sm" variant="warning" onDoubleClick={DeleteSale}>
 							<FontAwesomeIcon icon={faBan}/>
 						</Button>
 					</Col>
