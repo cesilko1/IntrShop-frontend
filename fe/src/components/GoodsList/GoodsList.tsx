@@ -25,8 +25,6 @@ const GoodsList: React.FC = () => {
 		const response = await GoodsApi.getGoods(token);
 		setLoading(false);
 		setGoods(response.data);
-
-		if(searchBy !== '') HandleSearch(searchBy);
 	}
 
 	const OpenModal = () => {

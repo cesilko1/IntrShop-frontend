@@ -49,7 +49,7 @@ const NavbarMenu: React.FC = () => {
 					</Dropdown.Menu>
 
 					{config.dev ? 
-						<small className="bg-danger ml-2">Development mode!</small>
+						<small className="bg-danger ml-2">Development!</small>
 						:
 						""
 					}
