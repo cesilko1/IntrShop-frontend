@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Routes from 'routes';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'index.scss';
@@ -12,14 +12,18 @@ import UserApi from 'api/UserApi';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GlobalAlert from 'components/GlobalAlert/GlobalAlert';
+import LoadingAnimation from 'components/LoadingAnimation/LoadingAnimation';
 
 const App: React.FC = () => {
 	const [ token, setToken ] = useContext(TokenContext);
 	const setUser = useContext(UserContext)[1];
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(()=>{
 		const loadData = async () => {
+			setLoading(true);
 			const loadedUser = await UserApi.getUserData(localStorage.token);
+			setLoading(false);
 			setUser(loadedUser.data);
 			setToken(localStorage.token);
 		}
@@ -29,10 +33,10 @@ const App: React.FC = () => {
 
 
 	if(!token) return(
-		<>
+		<LoadingAnimation loading={loading}>
 			<GlobalAlert/>
 			<Login/>
-		</>
+		</LoadingAnimation>
 	);
 
 	return(
