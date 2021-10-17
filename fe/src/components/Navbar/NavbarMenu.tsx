@@ -25,6 +25,7 @@ const NavbarMenu: React.FC = () => {
 	}
 
 	return(
+		<>
 		<Navbar expand="md" variant="dark" expanded={expanded} className={scss.navbar}>
 			<Container>
 				<Navbar.Brand as={Dropdown}>
@@ -56,7 +57,7 @@ const NavbarMenu: React.FC = () => {
 
 				<Navbar.Toggle onClick={()=>setExpanded(!expanded)} className={scss.button}/>
 
-				<Navbar.Collapse>
+				<Navbar.Collapse className={scss.nav}>
 					<Nav className="ml-auto">
 						<Nav.Link as={Link} to={HOME} onClick={()=>setExpanded(false)} className={scss.navLink}>
 							Prodávat
@@ -79,6 +80,9 @@ const NavbarMenu: React.FC = () => {
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
+		<div className={scss.spacer}>
+		</div>
+		</>
 	);
 }
 
