@@ -1,64 +1,31 @@
-import React, { useEffect, useContext, useState} from "react";
-import TokenContext from "contexts/TokenContext";
-import GoodsApi from "api/GoodsApi";
+import React from "react";
 import IGoods from "interfaces/Goods";
 import GoodsListItem from 'components/GoodsListItem/GoodsListItem';
 import { Table, Modal, FormControl } from 'react-bootstrap';
 import GoodsUpdateForm from 'components/GoodsUpdateForm/GoodsUpdateForm';
 import scss from './GoodsList.module.scss';
 import LoadingAnimation from "components/LoadingAnimation/LoadingAnimation";
+import GoodsListLogic from './GoodsListLogic';
 
 const GoodsList: React.FC = () => {
-	const [token,] = useContext(TokenContext);
-	const [goods, setGoods] = useState<IGoods[]>([]);
-	const [openModal, setOpenModal] = useState<boolean>(false);
-	const [searchBy, setSearchBy] = useState<string>("");
-	const [loading, setLoading] = useState<boolean>(true);
-
-	useEffect(()=>{
-		LoadData();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	const LoadData = async () => {
-		setLoading(true);
-		const response = await GoodsApi.getGoods(token);
-		setLoading(false);
-		setGoods(response.data);
-	}
-
-	const OpenModal = () => {
-		setOpenModal(true);
-	}
-
-	const ReverseData = () => {
-		const sortedData = [...goods].reverse();
-		setGoods(sortedData);
-	}
-
-	const HandleSearch = (searchString: string) => {
-		setSearchBy(searchString);
-		if(searchString === '') return LoadData();
-
-		setGoods([...goods].filter(o=>o.name.toLowerCase().includes(searchString)));
-	}
+	const logic = GoodsListLogic();
 
 	return(
-		<LoadingAnimation loading={loading}>
+		<LoadingAnimation loading={logic.loading}>
 			<FormControl
 				placeholder="Vyhledat"
 				size="sm"
 				className="w-50 mb-3"
 				type="text"
-				value={searchBy}
-				onChange={e=>HandleSearch(e.target.value)}
+				value={logic.searchBy}
+				onChange={e=>logic.HandleSearch(e.target.value)}
 			/>
 
 			<Table responsive striped bordered hover>
 				<thead>
 					<tr className={scss.tableHeader}>
 						<th></th>
-						<th onClick={()=>ReverseData()} style={{width: "8rem"}}>Název zboží</th>
+						<th onClick={()=>logic.ReverseData()} style={{width: "8rem"}}>Název zboží</th>
 						<th>Skladem</th>
 						<th>Prodáno</th>
 						<th>Ztraceno</th>
@@ -71,16 +38,16 @@ const GoodsList: React.FC = () => {
 				</thead>
 				<tbody className={scss.tbody}>
 					{
-						goods.map((item: IGoods, key: number) => {
+						logic.goods.map((item: IGoods, key: number) => {
 							return(
-								<GoodsListItem item={item} key={key} openMenu={OpenModal} reloadTable={LoadData}/>
+								<GoodsListItem item={item} key={key} openMenu={logic.OpenModal} reloadTable={logic.LoadData}/>
 							);
 						})
 					}
 				</tbody>
 			</Table>
 
-			<Modal size="lg" centered show={openModal} backdrop="static" onHide={()=>setOpenModal(false)}>
+			<Modal size="lg" centered show={logic.openModal} backdrop="static" onHide={()=>logic.setOpenModal(false)}>
 				<Modal.Header closeButton>
 					<Modal.Title>
 						Upravit položku
@@ -88,7 +55,7 @@ const GoodsList: React.FC = () => {
 				</Modal.Header>
 
 				<Modal.Body>
-					<GoodsUpdateForm reloadData={LoadData}/>
+					<GoodsUpdateForm reloadData={logic.LoadData}/>
 				</Modal.Body>
 			</Modal>
 		</LoadingAnimation>
